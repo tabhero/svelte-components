@@ -1,3 +1,8 @@
+# JS stuff
 node_modules/
 
+# Svelte stuff
+/dist/
+
+# Misc stuff
 .DS_Store

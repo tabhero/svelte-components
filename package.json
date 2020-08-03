@@ -1,0 +1,23 @@
+{
+  "name": "@tabhero/svelte-components",
+  "version": "0.1.0",
+  "description": "Svelte components for the TabHero project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tabhero/svelte-components.git"
+  },
+  "keywords": [
+    "svelte",
+    "components"
+  ],
+  "author": "TheGentlemenCreators",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tabhero/svelte-components/issues"
+  },
+  "homepage": "https://github.com/tabhero/svelte-components#readme"
+}

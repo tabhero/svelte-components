@@ -7,3 +7,4 @@ This Svelte component library was bootstrapped using [sveltejs/component-templat
 - https://github.com/sveltejs/svelte/issues/397
 - https://github.com/sveltejs/rollup-plugin-svelte#pkgsvelte
 - https://github.com/MadLittleMods/postcss-css-variables#preserve-default-false
+- https://resources.whitesourcesoftware.com/blog-whitesource/open-source-licenses-explained

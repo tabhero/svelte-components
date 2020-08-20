@@ -11,14 +11,16 @@ This Svelte component library was bootstrapped using [sveltejs/component-templat
 
 ### Svelte Preprocessing
 
-- https://github.com/MadLittleMods/postcss-css-variables#preserve-default-false
-- https://github.com/egoist/rollup-plugin-postcss
-- https://stackoverflow.com/questions/56483209/import-css-in-node-modules-to-svelte
-- https://www.npmjs.com/package/svelte-preprocess
+- CSS Preprocessing:
+    - https://github.com/MadLittleMods/postcss-css-variables#preserve-default-false
+- Rollup tools:
+    - https://github.com/egoist/rollup-plugin-postcss
+    - https://www.npmjs.com/package/svelte-preprocess
 - Examples:
     - https://github.com/jumanja/SvelteBulma/blob/master/rollup.config.js
 - Discussions:
     - https://dev.to/steelvoltage/comment/bp6c
+    - https://stackoverflow.com/questions/56483209/import-css-in-node-modules-to-svelte
 
 ### Licensing
 

@@ -4,7 +4,22 @@ This Svelte component library was bootstrapped using [sveltejs/component-templat
 
 ## Prep Work
 
+### Building + Publishing Svelte Components
+
 - https://github.com/sveltejs/svelte/issues/397
 - https://github.com/sveltejs/rollup-plugin-svelte#pkgsvelte
+
+### Svelte Preprocessing
+
 - https://github.com/MadLittleMods/postcss-css-variables#preserve-default-false
+- https://github.com/egoist/rollup-plugin-postcss
+- https://stackoverflow.com/questions/56483209/import-css-in-node-modules-to-svelte
+- https://www.npmjs.com/package/svelte-preprocess
+- Examples:
+    - https://github.com/jumanja/SvelteBulma/blob/master/rollup.config.js
+- Discussions:
+    - https://dev.to/steelvoltage/comment/bp6c
+
+### Licensing
+
 - https://resources.whitesourcesoftware.com/blog-whitesource/open-source-licenses-explained

@@ -26,6 +26,8 @@ This Svelte component library was bootstrapped using [sveltejs/component-templat
 
 - https://resources.whitesourcesoftware.com/blog-whitesource/open-source-licenses-explained
 
+## Instructions
+
 To use this package in Svelte apps, you'll need a plugin to import css files. We recommend `rollup-plugin-postcss`. This is because Svelte apps will import this package's source code, not the built package (more information [here](https://github.com/sveltejs/component-template#consuming-components)). Non-Svelte apps will import the built package, which has the styles bundled within it, so no import of css files is needed. By the way, we have also used `rollup-plugin-postcss` to perform this bundling.
 
 Moreover, in Svelte apps, if using `rollup-plugin-postcss`, make sure that the plugin gets the configuration of `extract: false` (it is `false` by default) so that this package's styles are bundled with the imported Svelte components. You can choose to set the plugin's configuration to `extract: true | <path>`, but then you'll have to make sure you download this extracted css file into your application, for example using the HTML `link` tag.

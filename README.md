@@ -31,3 +31,11 @@ This Svelte component library was bootstrapped using [sveltejs/component-templat
 To use this package in Svelte apps, you'll need a plugin to import css files. We recommend `rollup-plugin-postcss`. This is because Svelte apps will import this package's source code, not the built JS bundle (more information [here](https://github.com/sveltejs/component-template#consuming-components)). Non-Svelte apps will import the built JS bundle, which has the styles bundled within it (hence the styles are also client-side rendered using JS), so you don't need to import this package's css into your application. By the way, we have also used `rollup-plugin-postcss` to perform this bundling.
 
 Moreover, in Svelte apps, if using `rollup-plugin-postcss`, make sure that the plugin gets the configuration of `extract: false` (it is `false` by default) so that this package's styles are bundled in with the rest of our app's JS bundle. You can choose to set the plugin's configuration to `extract: true | <path>`, but then you'll have to make sure you download this extracted css file into your application, for example using the HTML `link` tag.
+
+Some styles of this package's components are specified using the rem unit. So by resetting the font-size of the root element in your app, you can rescale these styles to fit your requirements. The most notable of these styles are:
+
+- padding
+- margin
+- border-radius
+- max-height and min-height
+- grid-row-gap

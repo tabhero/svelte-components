@@ -47,5 +47,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash-es": "^4.17.15"
+  }
 }

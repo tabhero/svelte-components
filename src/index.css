@@ -1,3 +1,31 @@
-h1 {
-    color: purple;
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
+
+:root {
+    --col-primary: #146cdb;
+    --col-secondary: #ff388f;
+    --col-tertiary: #249c68;
+    --col-light-primary: #fff;
+    --col-dark-primary: #000;
+    --col-dark-secondary: #d8d8d8;
+
+    --font-size-xsm: .7rem;
+    --font-size-sm: .8rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.3rem;
+    --font-size-xlg: 1.75rem;
+
+    --font-weight-thicc: 900;
+    --font-weight-thic: 700;
+    --font-weight-md: 500;
+    --font-weight-thin: 400;
+    --font-weight-thinn: 300;
+
+    --font-family: 'Nunito Sans', sans-serif;
+
+    font-family: var(--font-family);
+
+    /* this is what determines 1rem */
+    /* NOTE: CHANGE THIS VALUE TO RESCALE ALL THE FONT SIZES. DONT CHANGE THEIR rem VALUES. */
+    /* This is so that any styles that fail to use this variable will use the pixel value given here, which means it silently falls back into a --font-size-md */
+    font-size: 14px;
 }

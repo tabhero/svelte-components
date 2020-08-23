@@ -71,3 +71,7 @@ Some styles of this package's components are specified using the rem unit. So by
 - border-radius
 - max-height and min-height
 - grid-row-gap
+
+## Contribution
+
+- [Contribution Guide](/CONTRIBUTING.md)

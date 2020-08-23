@@ -7,7 +7,7 @@ This Svelte component library was bootstrapped using [sveltejs/component-templat
 1. Make your code changes
 2. Add the changes to the staging area
 3. Run `npm run bump` to update the package version. This will also interactively add `package.json` and `package-lock.json` to the staging area.
-4. Push to remote. The push will trigger a publish to npm.
+4. Commit and push to remote. The push will trigger a publish to npm.
 
 ## Prep Work
 

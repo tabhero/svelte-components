@@ -18,6 +18,10 @@ export default {
 	plugins: [
 		svelte(),
 		resolve(),
-		postcss(),
+		postcss({
+			inject: {
+				insertAt: 'top'
+			}
+		}),
 	]
 };

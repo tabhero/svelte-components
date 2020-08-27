@@ -19,5 +19,15 @@ jobs:
       - name: Upload built docs as artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: storybook-build
+          name: storybook-docs
           path: storybook-static/
+  publish:
+    name: Publish to Github Pages
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download docs artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: storybook-docs
+          path: storybook-docs/

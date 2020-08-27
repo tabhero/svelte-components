@@ -31,6 +31,9 @@ jobs:
         with:
           name: storybook-docs
           path: storybook-docs/
+      - uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
       - name: Deploy to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:

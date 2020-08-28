@@ -17,6 +17,7 @@ These are the resources used to learn how to set up this project. Some of them h
 
 - https://github.com/sveltejs/svelte/issues/397
 - https://github.com/sveltejs/rollup-plugin-svelte#pkgsvelte
+- https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow
 
 ### Svelte Preprocessing
 

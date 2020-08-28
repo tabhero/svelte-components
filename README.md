@@ -1,5 +1,11 @@
 # Tabhero Svelte Components
 
+![Publish Documentation](https://github.com/tabhero/svelte-components/workflows/Publish%20Documentation/badge.svg)
+![Publish Package](https://github.com/tabhero/svelte-components/workflows/Publish%20Package/badge.svg)
+![Remove old artifacts](https://github.com/tabhero/svelte-components/workflows/Remove%20old%20artifacts/badge.svg)
+
+Svelte components for the TabHero project.
+
 ## Installation
 
 ```

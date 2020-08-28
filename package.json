@@ -1,6 +1,6 @@
 {
   "name": "@tabhero/svelte-components",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Svelte components for the TabHero project",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/tabhero/svelte-components/issues"
   },
-  "homepage": "https://github.com/tabhero/svelte-components#readme",
+  "homepage": "https://tabhero.github.io/svelte-components",
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@rollup/plugin-node-resolve": "^6.0.0",

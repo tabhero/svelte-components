@@ -1,4 +1,4 @@
-name: Publish Package Documentation
+name: Publish Documentation
 
 on: [push]
 

@@ -17,9 +17,9 @@ jobs:
       - name: Cache Storybook
         id: cache-storybook
         uses: actions/cache@v2
-          with:
-            path: storybook-static/
-            key: ${{ runner.os }}-${{ hashFiles('src/components') }}
+        with:
+          path: storybook-static/
+          key: ${{ runner.os }}-${{ hashFiles('src/components') }}
       - name: Build storybook docs
         if: steps.cache-storybook.outputs.cache-hit != 'true'
         run: npm run build-storybook

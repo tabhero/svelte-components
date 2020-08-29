@@ -12,12 +12,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12'
+      - name: Remove version from package-lock.json
+        run: node -e 'const package = require("./package-lock.json"); delete package.version; console.log(JSON.stringify(package, null, 4));' > versionless-lock.json
       - name: Cache node_modules
         id: cache-node-modules
         uses: actions/cache@v2
         with:
           path: node_modules/
-          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('versionless-lock.json') }}
       - name: Install dependencies
         run: npm install
       - name: Cache Storybook

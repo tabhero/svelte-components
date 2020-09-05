@@ -3,6 +3,7 @@
 ![Publish Documentation](https://github.com/tabhero/svelte-components/workflows/Publish%20Documentation/badge.svg)
 ![Publish Package](https://github.com/tabhero/svelte-components/workflows/Publish%20Package/badge.svg)
 ![Remove old artifacts](https://github.com/tabhero/svelte-components/workflows/Remove%20old%20artifacts/badge.svg)
+![NPM Version](https://img.shields.io/npm/v/@tabhero/svelte-components?color=blue)
 
 Svelte components for the TabHero project.
 

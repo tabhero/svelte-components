@@ -1,6 +1,6 @@
 {
   "name": "@tabhero/svelte-components",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Svelte components for the TabHero project",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",

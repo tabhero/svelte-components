@@ -13,4 +13,3 @@ export { default as NavLink } from './components/NavLink.svelte';
 export { default as SearchButton } from './components/SearchButton.svelte';
 export { default as Tag } from './components/Tag.svelte';
 export { default as TagGrid } from './components/TagGrid.svelte';
-export { default as TopBar } from './components/TopBar.svelte';

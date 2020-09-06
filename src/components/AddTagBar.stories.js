@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import AddTagBar from './AddTagBar.svelte';
+import AddTagBar from './AddTagBar.storywrap.svelte';
 
 import { ADD_TAG_INPUT_MAX_LENGTH } from '../constants';
 
@@ -84,4 +84,12 @@ export const InputMaxLengthExceeded = () => ({
     on: eventHandlers,
 });
 
-
+export const FloatWithManySuggestions = () => ({
+    Component: AddTagBar,
+    props: {
+        input: 'G',
+        suggestions: Array(10).fill({ id: 'xyz', added: false, name: 'Google' }),
+        float: true,
+    },
+    on: eventHandlers,
+});

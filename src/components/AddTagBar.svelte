@@ -5,6 +5,7 @@
 
     export let suggestions = [];
     export let input = '';
+    export let float = false;
     const MAX_LEN = ADD_TAG_INPUT_MAX_LENGTH;
 
     $: exactMatchFound = suggestions.find(tag => tag.name === input) !== undefined;
@@ -22,7 +23,7 @@
     }
 </script>
 
-<div class="container">
+<div class="container" class:float>
     <div class="input-container" class:empty>
         <input
             bind:value={input}
@@ -30,7 +31,7 @@
             placeholder="Search from your tag library or create a new tag!">
     </div>
     {#if !empty}
-        <div class="suggestions-container">
+        <div class="suggestions-container" class:float>
             {#if input.length > MAX_LEN}
                 <div class="info-prompt-wrapper">
                     <span class="prompt">Please add tags under {MAX_LEN + 1} characters only</span>
@@ -65,10 +66,11 @@
 
 <style>
     .container {
+        color: var(--col-primary);
+    }
+    .container.float {
         /* the absolute positioned suggestions box needs to have a relatively positioned parent */
         position: relative;
-
-        color: var(--col-primary);
     }
 
     .input-container {
@@ -84,6 +86,11 @@
     }
 
     .suggestions-container {
+        background-color: var(--col-light-primary);
+        border: solid 0.5px var(--col-primary);
+        border-top: 0;
+    }
+    .suggestions-container.float {
         /* these styles are to facilitate the absolutely positioned suggestion box */
         position: absolute;  /* this element's parent should be relatively positioned so that this works */
         left: 0;
@@ -91,10 +98,6 @@
         overflow: auto;
         z-index: 10;
         max-height: 3.75rem;  /* cut off the scrollable view's last visible item */
-        background-color: var(--col-light-primary);
-
-        border: solid 0.5px var(--col-primary);
-        border-top: 0;
     }
 
     input {

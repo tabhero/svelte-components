@@ -9,11 +9,11 @@ export const MediumFontSize = () => ({
     Component: Info,
     props: {
         content: [
-            [false, 'This is'],
-            [true, 'some bold piece'],
-            [false, 'of text'],
-            [true, 'like BOLD'],
-            [true, 'and here too'],
+            [false, 'ipsum nunc aliquet bibendum enim'],
+            [true, 'ipsum nunc aliquet bibendum enim'],
+            [false, 'ipsum nunc aliquet bibendum enim'],
+            [true, 'ipsum nunc aliquet bibendum enim'],
+            [false, 'ipsum nunc aliquet bibendum enim'],
         ]
     },
 });
@@ -23,11 +23,11 @@ export const SmallFontSize = () => ({
     props: {
         fontSize: 'small',
         content: [
-            [false, 'This is'],
-            [true, 'some bold piece'],
-            [false, 'of text'],
-            [true, 'like BOLD'],
-            [true, 'and here too'],
+            [false, 'ipsum nunc aliquet bibendum enim'],
+            [true, 'ipsum nunc aliquet bibendum enim'],
+            [false, 'ipsum nunc aliquet bibendum enim'],
+            [true, 'ipsum nunc aliquet bibendum enim'],
+            [false, 'ipsum nunc aliquet bibendum enim'],
         ]
     },
 });

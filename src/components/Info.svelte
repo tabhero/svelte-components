@@ -23,9 +23,11 @@
 
     .small {
         font-size: var(--font-size-sm);
+        line-height: var(--font-size-md);
     }
     .medium {
         font-size: var(--font-size-md);
+        line-height: var(--font-size-lg);
     }
 
     .bold {

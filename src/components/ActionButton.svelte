@@ -1,7 +1,3 @@
-<script>
-    export let text = '';
-</script>
-
 <style>
     button {
         border: 1px solid transparent;
@@ -21,4 +17,6 @@
     }
 </style>
 
-<button on:click>{text}</button>
+<button on:click>
+    <slot>Click</slot>
+</button>

@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import NavLink from './NavLink.svelte';
+import NavLink from './NavLink.storywrap.svelte';
 
 export default {
     title: 'NavLink',
@@ -10,7 +10,13 @@ export default {
 export const Default = () => ({
     Component: NavLink,
     props: {
-        text: 'Some Text Content'
+        slot: 'Some Text Content'
     },
+    on: { click: action('click') }
+});
+
+export const NoContent = () => ({
+    Component: NavLink,
+    props: {},
     on: { click: action('click') }
 });

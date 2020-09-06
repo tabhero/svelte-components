@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import ActionButton from './ActionButton.svelte';
+import ActionButton from './ActionButton.storywrap.svelte';
 
 export default {
     title: 'ActionButton',
@@ -10,7 +10,13 @@ export default {
 export const DefaultAndClicked = () => ({
     Component: ActionButton,
     props: {
-        text: 'Some Text Content'
+        slot: 'Some Text Content'
     },
+    on: { click: action('click') }
+});
+
+export const NoContent = () => ({
+    Component: ActionButton,
+    props: {},
     on: { click: action('click') }
 });

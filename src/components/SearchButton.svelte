@@ -1,7 +1,3 @@
-<script>
-    export let text = '';
-</script>
-
 <style>
     button {
         border: 1px solid var(--col-secondary);
@@ -16,4 +12,6 @@
     }
 </style>
 
-<button on:click>🔍&nbsp;&nbsp;{text}</button>
+<button on:click>
+    🔍&nbsp;&nbsp; <slot>Search</slot>
+</button>

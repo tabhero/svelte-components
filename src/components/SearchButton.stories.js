@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import SearchButton from './SearchButton.svelte';
+import SearchButton from './SearchButton.storywrap.svelte';
 
 export default {
     title: 'SearchButton',
@@ -10,7 +10,13 @@ export default {
 export const Default = () => ({
     Component: SearchButton,
     props: {
-        text: 'Some Text Content',
+        slot: 'Some Text Content',
     },
+    on: { click: action('click') }
+});
+
+export const NoContent = () => ({
+    Component: SearchButton,
+    props: {},
     on: { click: action('click') }
 });

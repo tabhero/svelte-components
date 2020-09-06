@@ -1,4 +1,4 @@
-import Heading from './Heading.svelte';
+import Heading from './Heading.storywrap.svelte';
 
 export default {
     title: 'Heading',
@@ -8,6 +8,11 @@ export default {
 export const Default = () => ({
     Component: Heading,
     props: {
-        text: 'This Is A Heading'
+        slot: 'This Is A Heading'
     },
+});
+
+export const NoContent = () => ({
+    Component: Heading,
+    props: {},
 });

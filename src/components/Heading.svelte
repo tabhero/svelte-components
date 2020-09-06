@@ -1,7 +1,3 @@
-<script>
-    export let text = '';
-</script>
-
 <style>
     h2 {
         font-weight: var(--font-weight-thic);
@@ -10,4 +6,6 @@
     }
 </style>
 
-<h2>{text}</h2>
+<h2>
+    <slot>Heading</slot>
+</h2>

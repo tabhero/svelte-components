@@ -1,7 +1,3 @@
-<script>
-    export let text = '';
-</script>
-
 <style>
     span {
         color: var(--col-secondary);
@@ -12,4 +8,6 @@
     }
 </style>
 
-<span on:click>{text}</span>
+<span on:click>
+    <slot>go</slot>
+</span>

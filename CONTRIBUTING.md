@@ -38,5 +38,6 @@ These are the resources used to learn how to set up this project. Some of them h
 
 ## Design Decisions
 
-- Some components, like `Heading`, would naturally take in child components as content, like ```<Heading>Heading Text</Heading>```
+- :white_check_mark: __We can now pass in child components__
+Some components, like `Heading`, would naturally take in child components as content, like ```<Heading>Heading Text</Heading>```
 but we chose to provide content as props (`<Heading text="Heading Text" />`) because currently, Storybook doesn't support the Svelte template syntax. We could create a story wrapper to achieve this, but this is something we're willing to forgo for now.

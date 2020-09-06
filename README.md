@@ -56,13 +56,11 @@ The configuration `insertAt: 'top'` let's your app override this package's CSS, 
     let name = '';
 </script>
 
-<Heading text="Please Introduce Yourself" />
+<Heading>Please Introduce Yourself</Heading>
 <Input
     bind:value={name}
     placeholder="Enter your name here" />
-<ActionButton
-    text="Submit"
-    on:click={e => alert(name)} />
+<ActionButton on:click={e => alert(name)}>Submit</ActionButton>
 ```
 
 ### Non-Svelte Apps

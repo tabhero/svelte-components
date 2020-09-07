@@ -44,7 +44,7 @@ The configuration `insertAt: 'top'` let's your app override this package's CSS, 
 ## Usage
 
 ### Svelte Apps
-```js
+```svelte
 // App.svelte
 <script>
     import {

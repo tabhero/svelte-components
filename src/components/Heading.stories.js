@@ -1,4 +1,4 @@
-import Heading from './Heading.storywrap.svelte';
+import Heading from './Heading.wrap.svelte';
 
 export default {
     title: 'Heading',

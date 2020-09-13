@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import SearchButton from './SearchButton.storywrap.svelte';
+import SearchButton from './SearchButton.wrap.svelte';
 
 export default {
     title: 'SearchButton',

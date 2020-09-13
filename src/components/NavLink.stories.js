@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import NavLink from './NavLink.storywrap.svelte';
+import NavLink from './NavLink.wrap.svelte';
 
 export default {
     title: 'NavLink',

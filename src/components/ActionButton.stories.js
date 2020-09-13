@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import ActionButton from './ActionButton.storywrap.svelte';
+import ActionButton from './ActionButton.wrap.svelte';
 
 export default {
     title: 'ActionButton',

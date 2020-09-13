@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import AddTagBar from './AddTagBar.storywrap.svelte';
+import AddTagBar from './AddTagBar.wrap.svelte';
 
 import { ADD_TAG_INPUT_MAX_LENGTH } from '../constants';
 

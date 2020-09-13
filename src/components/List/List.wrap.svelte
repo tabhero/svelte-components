@@ -1,7 +1,7 @@
 <script>
     import List from './List.svelte';
 
-    export let items = [];
+    export let items;
     export let slot;
 </script>
 

@@ -4,6 +4,7 @@ import List from './List.wrap.svelte';
 
 import Collection from '../Collection.svelte';
 import Link from '../Link.svelte';
+import Tag from '../Tag.svelte';
 
 export default {
     title: 'List',
@@ -50,6 +51,24 @@ export const ListOfLinks = () => ({
     props: {
         items: links,
         slot: Link
+    },
+    on: { clickItem: action('clickItem') }
+});
+
+const tags = [
+    { id: '1', added: true, name: 'Youtube' },
+    { id: '2', added: true, name: 'Coffee!' },
+    { id: '3', added: true, name: 'Study Philosophy' },
+    { id: '4', added: false, name: 'Events' },
+    { id: '5', added: false, name: 'Reading List' },
+    { id: '6', added: false, name: 'Medium' },
+];
+
+export const ListOfTags = () => ({
+    Component: List,
+    props: {
+        items: tags,
+        slot: Tag
     },
     on: { clickItem: action('clickItem') }
 });

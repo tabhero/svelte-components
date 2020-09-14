@@ -14,6 +14,7 @@
 
     input {
         font-size: var(--font-size-md);
+        color: var(--col-secondary);
         width: 100%;
         outline: none;
         flex: 1;

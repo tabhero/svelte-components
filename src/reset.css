@@ -57,5 +57,5 @@ button {
 }
 input {
 	/* without this, the input width overflows its parent element when the input width is 100% */
-	/* box-sizing: border-box; */
+	box-sizing: border-box;
 }

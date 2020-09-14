@@ -74,7 +74,6 @@
     }
 
     .input-container {
-        /* without horizontal padding, input always overflows the container */
         padding: .5rem 1rem;
 
         border: solid 0.5px var(--col-primary);

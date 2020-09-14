@@ -52,7 +52,10 @@ button {
 	outline: none;
 	font-family: inherit;
 }
-
 *::-webkit-scrollbar {
 	display: none;
+}
+input {
+	/* without this, the input width overflows its parent element when the input width is 100% */
+	/* box-sizing: border-box; */
 }

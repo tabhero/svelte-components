@@ -13,6 +13,7 @@ export { default as Input } from './components/Input.svelte';
 export { default as Link } from './components/Link.svelte';
 export { default as List } from './components/List/List.svelte';
 export { default as NavLink } from './components/NavLink.svelte';
+export { default as SearchBar } from './components/SearchBar.svelte';
 export { default as SearchButton } from './components/SearchButton.svelte';
 export { default as Tag } from './components/Tag.svelte';
 export { default as TagGrid } from './components/TagGrid.svelte';

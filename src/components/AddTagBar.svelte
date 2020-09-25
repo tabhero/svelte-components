@@ -105,13 +105,13 @@
         flex-direction: column;
         justify-content: center;
 
+        transition: flex .3s ease-out;
         flex: 0;
     }
     .input-container.empty {
         border-radius: .25rem;
     }
     .input-container.expand {
-        transition: flex .3s ease-out;
         flex: 1;
     }
 

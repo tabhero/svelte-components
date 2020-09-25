@@ -97,7 +97,7 @@
         border-radius: .25rem;
     }
     .input-container.expand {
-        transition: flex .3s ease-out;
+        transition: flex .2s ease-in;
         flex: 1;
     }
     .input-container.expand:focus-within {

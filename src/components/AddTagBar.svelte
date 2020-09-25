@@ -6,12 +6,16 @@
     export let suggestions = [];
     export let input = '';
     export let float = false;
+    export let fill = false;
     const MAX_LEN = ADD_TAG_INPUT_MAX_LENGTH;
 
     $: exactMatchFound = suggestions.find(tag => tag.name === input) !== undefined;
     $: empty = input === '';
 
     const dispatch = createEventDispatcher();
+
+    // assume input is always not in focus when mounted
+    let outoffocus = true;
 
     function handleSuggestionClick(tagId) {
         dispatch('selectSuggestion', { tagId });
@@ -21,11 +25,20 @@
             tagName: inputText
         });
     }
+
+    function handleFocusIn() {
+        outoffocus = false;
+    }
+    function handleFocusOut() {
+        outoffocus = true;
+    }
 </script>
 
-<div class="container" class:float>
-    <div class="input-container" class:empty>
+<div class="container" class:float class:expand={fill && empty && outoffocus}>
+    <div class="input-container" class:empty class:expand={fill && empty && outoffocus}>
         <input
+            on:focus={handleFocusIn}
+            on:focusout={handleFocusOut}
             bind:value={input}
             type="text"
             placeholder="Search from your tag library or create a new tag!">
@@ -72,6 +85,14 @@
         /* the absolute positioned suggestions box needs to have a relatively positioned parent */
         position: relative;
     }
+    .container.expand {
+        /* set all properties needed for this component to fill the parent space */
+        height: 100%;
+        flex: 1;
+
+        display: flex;
+        flex-direction: column
+    }
 
     .input-container {
         padding: .5rem 1rem;
@@ -79,9 +100,19 @@
         border: solid 0.5px var(--col-primary);
         border-top-left-radius: .25rem;
         border-top-right-radius: .25rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        flex: 0;
     }
     .input-container.empty {
         border-radius: .25rem;
+    }
+    .input-container.expand {
+        transition: flex .3s ease-out;
+        flex: 1;
     }
 
     .suggestions-container {
@@ -110,6 +141,7 @@
         font-weight: var(--font-weight-thinn);
         font-size: var(--font-size-sm);
         font-style: oblique;
+        text-align: center;
     }
 
     li {

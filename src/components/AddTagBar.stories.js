@@ -93,3 +93,42 @@ export const FloatWithManySuggestions = () => ({
     },
     on: eventHandlers,
 });
+
+export const ParentBigWithoutFill = () => ({
+    Component: AddTagBar,
+    props: {
+        input: '',
+        suggestions: [],
+        float: true,
+        fill: false,
+        _wrapConfig: {
+            parentBig: true
+        }
+    },
+    on: eventHandlers,
+});
+
+export const ParentBigWithFill = () => ({
+    Component: AddTagBar,
+    props: {
+        input: '',
+        suggestions: [],
+        float: true,
+        fill: true,
+        _wrapConfig: {
+            parentBig: true
+        }
+    },
+    on: eventHandlers,
+});
+
+export const ParentBigWithFillWithInput = () => ({
+    Component: AddTagBar,
+    props: {
+        input: 'G',
+        suggestions: Array(10).fill({ id: 'xyz', added: false, name: 'Google' }),
+        float: true,
+        fill: true,
+    },
+    on: eventHandlers,
+});

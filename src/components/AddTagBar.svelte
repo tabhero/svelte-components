@@ -14,9 +14,6 @@
 
     const dispatch = createEventDispatcher();
 
-    // assume input is always not in focus when mounted
-    let outoffocus = true;
-
     function handleSuggestionClick(tagId) {
         dispatch('selectSuggestion', { tagId });
     }
@@ -25,20 +22,11 @@
             tagName: inputText
         });
     }
-
-    function handleFocusIn() {
-        outoffocus = false;
-    }
-    function handleFocusOut() {
-        outoffocus = true;
-    }
 </script>
 
-<div class="container" class:float class:expand={fill && empty && outoffocus}>
-    <div class="input-container" class:empty class:expand={fill && empty && outoffocus}>
+<div class="container" class:float class:expand={fill && empty}>
+    <div class="input-container" class:empty class:expand={fill && empty}>
         <input
-            on:focus={handleFocusIn}
-            on:focusout={handleFocusOut}
             bind:value={input}
             type="text"
             placeholder="Search from your tag library or create a new tag!">
@@ -104,15 +92,16 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-
-        transition: flex .3s ease-out;
-        flex: 0;
     }
     .input-container.empty {
         border-radius: .25rem;
     }
     .input-container.expand {
+        transition: flex .3s ease-out;
         flex: 1;
+    }
+    .input-container.expand:focus-within {
+        flex: 0;
     }
 
     .suggestions-container {

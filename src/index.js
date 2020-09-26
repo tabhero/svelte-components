@@ -2,7 +2,7 @@ import './reset.css';
 import './index.css';
 
 export { default as ActionButton } from './components/ActionButton.svelte';
-export { default as AddTagBar } from './components/AddTagBar.svelte';
+export { default as TagBar } from './components/TagBar.svelte';
 export { default as CarouselNav } from './components/CarouselNav.svelte';
 export { default as CheckList } from './components/CheckList/CheckList.svelte';
 export { default as Collection } from './components/Collection.svelte';

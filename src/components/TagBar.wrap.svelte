@@ -1,5 +1,5 @@
 <script>
-    import AddTagBar from './AddTagBar.svelte';
+    import TagBar from './TagBar.svelte';
 
     export let suggestions;
     export let input;
@@ -22,7 +22,7 @@
 
 <p>Some content above the component</p>
     <div class:big-parent={_wrapConfig.parentBig}>
-        <AddTagBar
+        <TagBar
             {suggestions}
             {input}
             {float}

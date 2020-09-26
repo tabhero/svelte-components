@@ -1,12 +1,12 @@
 import { action } from '@storybook/addon-actions';
 
-import AddTagBar from './AddTagBar.wrap.svelte';
+import TagBar from './TagBar.wrap.svelte';
 
 import { ADD_TAG_INPUT_MAX_LENGTH } from '../constants';
 
 export default {
-    title: 'AddTagBar',
-    component: AddTagBar,
+    title: 'TagBar',
+    component: TagBar,
 };
 
 const eventHandlers = {
@@ -15,7 +15,7 @@ const eventHandlers = {
 };
 
 export const EmptyInput = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: '',
         suggestions: [],
@@ -24,7 +24,7 @@ export const EmptyInput = () => ({
 });
 
 export const ManySuggestions = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: 'G',
         suggestions: Array(10).fill({ id: 'xyz', added: false, name: 'Google' }),
@@ -33,7 +33,7 @@ export const ManySuggestions = () => ({
 });
 
 export const FewSuggestions = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: 'Go',
         suggestions: [
@@ -45,7 +45,7 @@ export const FewSuggestions = () => ({
 });
 
 export const SomeAddedSuggestions = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: 'Go',
         suggestions: [
@@ -58,7 +58,7 @@ export const SomeAddedSuggestions = () => ({
 });
 
 export const ExactMatch = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: 'Goa',
         suggestions: [{ id: 'xyz', added: false, name: 'Goa' }],
@@ -67,7 +67,7 @@ export const ExactMatch = () => ({
 });
 
 export const InputMaxLength = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: Array(ADD_TAG_INPUT_MAX_LENGTH).fill('G').join(''),
         suggestions: [],
@@ -76,7 +76,7 @@ export const InputMaxLength = () => ({
 });
 
 export const InputMaxLengthExceeded = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: Array(ADD_TAG_INPUT_MAX_LENGTH + 1).fill('G').join(''),
         suggestions: [],
@@ -85,7 +85,7 @@ export const InputMaxLengthExceeded = () => ({
 });
 
 export const FloatWithManySuggestions = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: 'G',
         suggestions: Array(10).fill({ id: 'xyz', added: false, name: 'Google' }),
@@ -95,7 +95,7 @@ export const FloatWithManySuggestions = () => ({
 });
 
 export const ParentBigWithoutFill = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: '',
         suggestions: [],
@@ -109,7 +109,7 @@ export const ParentBigWithoutFill = () => ({
 });
 
 export const ParentBigWithFill = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: '',
         suggestions: [],
@@ -123,7 +123,7 @@ export const ParentBigWithFill = () => ({
 });
 
 export const ParentBigWithFillWithInput = () => ({
-    Component: AddTagBar,
+    Component: TagBar,
     props: {
         input: 'G',
         suggestions: Array(10).fill({ id: 'xyz', added: false, name: 'Google' }),

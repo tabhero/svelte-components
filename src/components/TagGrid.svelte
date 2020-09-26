@@ -24,9 +24,6 @@
         grid-auto-rows: 1fr;
         grid-row-gap: 1rem;
 
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-
         /* DEBUG */
         /* background-color: red; */
         /* border: 1px solid black; */

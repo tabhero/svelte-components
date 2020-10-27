@@ -3,8 +3,31 @@ name: Publish Package
 on: [push]
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Remove version from package-lock.json
+        run: node -e 'const package = require("./package-lock.json"); delete package.version; console.log(JSON.stringify(package, null, 4));' > versionless-lock.json
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-${{ hashFiles('versionless-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Run tests
+        run: npm test
   build:
     name: Build package
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

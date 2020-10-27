@@ -13,3 +13,9 @@ test('does not have added class when added is not passed', () => {
 
   expect(getByText('Some tag name')).not.toHaveClass('added')
 })
+
+test('has added class when added is passed as true', () => {
+  const { getByText } = render(Tag, { name: 'Some tag name', added: true })
+
+  expect(getByText('Some tag name')).toHaveClass('added')
+})

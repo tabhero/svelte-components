@@ -43,6 +43,6 @@
     /* TODO: include hover case for feedback */
 </style>
 
-<div class="container" class:added on:click|stopPropagation={handleClick}>
+<div class="container" class:added on:click|stopPropagation={handleClick} data-testid="container" tabindex="0">
     <div class="text" class:added>{name}</div>
 </div>

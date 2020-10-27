@@ -10,7 +10,9 @@
     "prepublishOnly": "npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "bump": "read -p 'Bump the package version (major | minor | patch | <newversion>): ' version && npm --no-git-tag-version version $version && git add -p package.json && git add -p package-lock.json"
+    "bump": "read -p 'Bump the package version (major | minor | patch | <newversion>): ' version && npm --no-git-tag-version version $version && git add -p package.json && git add -p package-lock.json",
+    "test": "jest src",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -33,12 +35,17 @@
     "@storybook/addon-essentials": "^6.0.16",
     "@storybook/addon-links": "^6.0.16",
     "@storybook/svelte": "^6.0.16",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/svelte": "^3.0.0",
+    "babel-jest": "^26.6.1",
     "babel-loader": "^8.1.0",
+    "jest": "^26.6.1",
     "react-is": "^16.13.1",
     "rollup": "^1.20.0",
     "rollup-plugin-postcss": "^3.1.5",
     "rollup-plugin-svelte": "^5.0.0",
     "svelte": "^3.24.1",
+    "svelte-jester": "^1.1.5",
     "svelte-loader": "^2.13.6"
   },
   "files": [
@@ -50,5 +57,16 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.15"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.svelte$": "svelte-jester"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "svelte"
+    ],
+    "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"]
   }
 }

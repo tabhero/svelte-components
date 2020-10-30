@@ -33,9 +33,9 @@
                 focusRef.focus();
                 return;
             }
-            const next = focusRef.nextElementSibling;
+            let next = focusRef.nextElementSibling;
             if (next === null) {
-                return;
+                next = suggestionsRef.firstElementChild;
             }
             focusRef = next;
             focusRef.focus();

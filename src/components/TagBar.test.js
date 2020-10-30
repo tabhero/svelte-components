@@ -59,3 +59,19 @@ test('focuses on the first suggestion when no exact match on pressing TAB follow
 
   expect(getByText('one').closest('li')).toHaveFocus()
 })
+
+test('wraps the focus around to the prompt when no exact match and arrow down goes past the last suggestion', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: [
+      { id: 'xyz', added: false, name: 'one' }
+    ]
+  })
+
+  userEvent.tab()
+  fireKeydown(getByTestId('container'))
+  fireKeydown(getByTestId('container'))
+  fireKeydown(getByTestId('container'))
+
+  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
+})

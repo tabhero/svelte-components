@@ -9,9 +9,12 @@ import TagBar from './TagBar'
  *   - https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event
  */
 
- const fireKeydown = (domNode) => {
-   return fireEvent.keyDown(domNode, { key: 'ArrowDown', code: 'ArrowDown' })
- }
+const fireKeydown = (domNode) => {
+  return fireEvent.keyDown(domNode, { key: 'ArrowDown', code: 'ArrowDown' })
+}
+const fireKeyup = (domNode) => {
+  return fireEvent.keyDown(domNode, { key: 'ArrowUp', code: 'ArrowUp' })
+}
 
  const placeholder = 'Search from your tag library or create a new tag!'
 
@@ -81,6 +84,66 @@ test('keeps focus on the input element on arrow down when no input and hence no 
 
   // act
   await fireKeydown(target)
+
+  expect(getByPlaceholderText(placeholder)).toHaveFocus()
+})
+
+test('focuses on the last suggestion on pressing up arrow when no exact match', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: [
+      { id: 'xyz', added: false, name: 'one' },
+      { id: 'abc', added: false, name: 'two' }
+    ]
+  })
+  const target = getByTestId('container')
+
+  await fireKeyup(target)
+
+  expect(getByText('two').closest('li')).toHaveFocus()
+})
+
+test('focuses on the second last suggestion on pressing two up arrows when no exact match', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: [
+      { id: 'xyz', added: false, name: 'one' },
+      { id: 'abc', added: false, name: 'two' }
+    ]
+  })
+  const target = getByTestId('container')
+
+  await fireKeyup(target)
+  await fireKeyup(target)
+
+  expect(getByText('one').closest('li')).toHaveFocus()
+})
+
+test('wraps the focus around to the last element when arrow up goes past the prompt suggestion and no exact match', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: [
+      { id: 'xyz', added: false, name: 'one' },
+      { id: 'xyz', added: false, name: 'two' }
+    ]
+  })
+  const target = getByTestId('container')
+
+  await fireKeyup(target)
+  await fireKeyup(target)
+  await fireKeyup(target)
+  await fireKeyup(target)
+
+  expect(getByText('two').closest('li')).toHaveFocus()
+})
+
+test('keeps focus on the input element on arrow up when no input and hence no suggestions present', async () => {
+  const { getByTestId, getByPlaceholderText } = render(TagBar, {})
+  getByPlaceholderText(placeholder).focus()
+  const target = getByTestId('container')
+
+  // act
+  await fireKeyup(target)
 
   expect(getByPlaceholderText(placeholder)).toHaveFocus()
 })

@@ -27,20 +27,27 @@
     }
     function handleKeydown(event) {
         const key = event.key;
-        if (key == 'ArrowDown') {
+        if (key === 'ArrowDown') {
             if (suggestions.length === 0) {
                 return;
             }
             if (focusRef === null) {
                 focusRef = suggestionsRef.firstElementChild;
-                focusRef.focus();
+            } else {
+                const next = focusRef.nextElementSibling || suggestionsRef.firstElementChild;
+                focusRef = next;
+            }
+            focusRef.focus();
+        } else if (key === 'ArrowUp') {
+            if (suggestions.length === 0) {
                 return;
             }
-            let next = focusRef.nextElementSibling;
-            if (next === null) {
-                next = suggestionsRef.firstElementChild;
+            if (focusRef === null) {
+                focusRef = suggestionsRef.lastElementChild;
+            } else {
+                const prev = focusRef.previousElementSibling || suggestionsRef.lastElementChild;
+                focusRef = prev;
             }
-            focusRef = next;
             focusRef.focus();
         }
     }

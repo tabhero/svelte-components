@@ -13,17 +13,15 @@ import TagBar from './TagBar'
    return fireEvent.keyDown(domNode, { key: 'ArrowDown', code: 'ArrowDown' })
  }
 
-test('has an input element with the proper placeholder', () => {
-  const placeholder = 'Search from your tag library or create a new tag!'
+ const placeholder = 'Search from your tag library or create a new tag!'
 
+test('has an input element with the proper placeholder', () => {
   const { getByPlaceholderText } = render(TagBar, {})
 
   expect(getByPlaceholderText(placeholder)).toBeInTheDocument()
 })
 
 test('has an input element that gets focused on pressing TAB', () => {
-  const placeholder = 'Search from your tag library or create a new tag!'
-
   const { getByPlaceholderText } = render(TagBar, {})
 
   userEvent.tab()
@@ -77,7 +75,6 @@ test('wraps the focus around to the prompt when arrow press down goes past the l
 })
 
 test('keeps focus on the input element on arrow down when no input and hence no suggestions present', async () => {
-  const placeholder = 'Search from your tag library or create a new tag!'
   const { getByTestId, getByPlaceholderText } = render(TagBar, {})
 
   userEvent.tab()

@@ -11,7 +11,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "bump": "read -p 'Bump the package version (major | minor | patch | <newversion>): ' version && npm --no-git-tag-version version $version && git add -p package.json && git add -p package-lock.json",
-    "test": "jest src",
+    "test": "jest src --verbose",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {

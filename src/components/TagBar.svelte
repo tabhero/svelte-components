@@ -43,9 +43,14 @@
             focusRef = next;
             focusRef.focus();
         } else if (key == 'ArrowUp') {
-            focusRef = suggestionsRef.lastElementChild;
+            if (focusRef === null) {
+                focusRef = suggestionsRef.lastElementChild;
+                focusRef.focus();
+                return;
+            }
+            const prev = focusRef.previousElementSibling;
+            focusRef = prev;
             focusRef.focus();
-            return;
         }
     }
 </script>

@@ -102,3 +102,19 @@ test('focuses on the last suggestion on pressing up arrow when no exact match', 
 
   expect(getByText('two').closest('li')).toHaveFocus()
 })
+
+test('focuses on the second last suggestion on pressing two up arrows when no exact match', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: [
+      { id: 'xyz', added: false, name: 'one' },
+      { id: 'abc', added: false, name: 'two' }
+    ]
+  })
+  const target = getByTestId('container')
+
+  await fireKeyup(target)
+  await fireKeyup(target)
+
+  expect(getByText('one').closest('li')).toHaveFocus()
+})

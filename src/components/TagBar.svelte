@@ -33,14 +33,10 @@
             }
             if (focusRef === null) {
                 focusRef = suggestionsRef.firstElementChild;
-                focusRef.focus();
-                return;
+            } else {
+                const next = focusRef.nextElementSibling || suggestionsRef.firstElementChild;
+                focusRef = next;
             }
-            let next = focusRef.nextElementSibling;
-            if (next === null) {
-                next = suggestionsRef.firstElementChild;
-            }
-            focusRef = next;
             focusRef.focus();
         } else if (key === 'ArrowUp') {
             if (suggestions.length === 0) {
@@ -48,14 +44,10 @@
             }
             if (focusRef === null) {
                 focusRef = suggestionsRef.lastElementChild;
-                focusRef.focus();
-                return;
+            } else {
+                const prev = focusRef.previousElementSibling || suggestionsRef.lastElementChild;
+                focusRef = prev;
             }
-            let prev = focusRef.previousElementSibling;
-            if (prev === null) {
-                prev = suggestionsRef.lastElementChild;
-            }
-            focusRef = prev;
             focusRef.focus();
         }
     }

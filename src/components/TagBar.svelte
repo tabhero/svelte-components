@@ -48,7 +48,10 @@
                 focusRef.focus();
                 return;
             }
-            const prev = focusRef.previousElementSibling;
+            let prev = focusRef.previousElementSibling;
+            if (prev === null) {
+                prev = suggestionsRef.lastElementChild;
+            }
             focusRef = prev;
             focusRef.focus();
         }

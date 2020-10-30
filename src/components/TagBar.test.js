@@ -118,3 +118,21 @@ test('focuses on the second last suggestion on pressing two up arrows when no ex
 
   expect(getByText('one').closest('li')).toHaveFocus()
 })
+
+test('wraps the focus around to the last element when arrow up goes past the prompt suggestion and no exact match', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: [
+      { id: 'xyz', added: false, name: 'one' },
+      { id: 'xyz', added: false, name: 'two' }
+    ]
+  })
+  const target = getByTestId('container')
+
+  await fireKeyup(target)
+  await fireKeyup(target)
+  await fireKeyup(target)
+  await fireKeyup(target)
+
+  expect(getByText('two').closest('li')).toHaveFocus()
+})

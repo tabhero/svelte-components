@@ -31,7 +31,7 @@ test('has an input element that gets focused on pressing TAB', () => {
   expect(getByPlaceholderText(placeholder)).toHaveFocus()
 })
 
-test('focuses on the prompt when no exact match on pressing TAB followed by down arrow', async () => {
+test('focuses on the prompt on pressing TAB followed by down arrow when no exact match', async () => {
   const { getByTestId, getByText } = render(TagBar, {
     input: 'something',
     suggestions: [
@@ -45,7 +45,7 @@ test('focuses on the prompt when no exact match on pressing TAB followed by down
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
 
-test('focuses on the first suggestion when no exact match on pressing TAB followed by two down arrows', async () => {
+test('focuses on the first suggestion on pressing TAB followed by two down arrows when no exact match', async () => {
   const { getByTestId, getByText } = render(TagBar, {
     input: 'something',
     suggestions: [
@@ -60,7 +60,7 @@ test('focuses on the first suggestion when no exact match on pressing TAB follow
   expect(getByText('one').closest('li')).toHaveFocus()
 })
 
-test('wraps the focus around to the prompt when no exact match and arrow down goes past the last suggestion', async () => {
+test('wraps the focus around to the prompt when arrow press down goes past the last suggestion and no exact match', async () => {
   const { getByTestId, getByText } = render(TagBar, {
     input: 'something',
     suggestions: [

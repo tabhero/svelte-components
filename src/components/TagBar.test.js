@@ -36,8 +36,9 @@ test('focuses on the prompt on pressing down arrow when no exact match', async (
       { id: 'xyz', added: false, name: 'one' }
     ]
   })
+  const target = getByTestId('container')
 
-  await fireKeydown(getByTestId('container'))
+  await fireKeydown(target)
 
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
@@ -49,9 +50,10 @@ test('focuses on the first suggestion on pressing two down arrows when no exact 
       { id: 'xyz', added: false, name: 'one' }
     ]
   })
+  const target = getByTestId('container')
 
-  await fireKeydown(getByTestId('container'))
-  await fireKeydown(getByTestId('container'))
+  await fireKeydown(target)
+  await fireKeydown(target)
 
   expect(getByText('one').closest('li')).toHaveFocus()
 })
@@ -63,10 +65,11 @@ test('wraps the focus around to the prompt when arrow press down goes past the l
       { id: 'xyz', added: false, name: 'one' }
     ]
   })
+  const target = getByTestId('container')
 
-  await fireKeydown(getByTestId('container'))
-  await fireKeydown(getByTestId('container'))
-  await fireKeydown(getByTestId('container'))
+  await fireKeydown(target)
+  await fireKeydown(target)
+  await fireKeydown(target)
 
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
@@ -74,9 +77,10 @@ test('wraps the focus around to the prompt when arrow press down goes past the l
 test('keeps focus on the input element on arrow down when no input and hence no suggestions present', async () => {
   const { getByTestId, getByPlaceholderText } = render(TagBar, {})
   getByPlaceholderText(placeholder).focus()
+  const target = getByTestId('container')
 
   // act
-  await fireKeydown(getByTestId('container'))
+  await fireKeydown(target)
 
   expect(getByPlaceholderText(placeholder)).toHaveFocus()
 })

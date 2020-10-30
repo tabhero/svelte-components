@@ -42,6 +42,10 @@
             }
             focusRef = next;
             focusRef.focus();
+        } else if (key == 'ArrowUp') {
+            focusRef = suggestionsRef.lastElementChild;
+            focusRef.focus();
+            return;
         }
     }
 </script>

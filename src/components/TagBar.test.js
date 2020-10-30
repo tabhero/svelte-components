@@ -9,9 +9,12 @@ import TagBar from './TagBar'
  *   - https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event
  */
 
- const fireKeydown = (domNode) => {
-   return fireEvent.keyDown(domNode, { key: 'ArrowDown', code: 'ArrowDown' })
- }
+const fireKeydown = (domNode) => {
+  return fireEvent.keyDown(domNode, { key: 'ArrowDown', code: 'ArrowDown' })
+}
+const fireKeyup = (domNode) => {
+  return fireEvent.keyDown(domNode, { key: 'ArrowUp', code: 'ArrowUp' })
+}
 
  const placeholder = 'Search from your tag library or create a new tag!'
 
@@ -83,4 +86,19 @@ test('keeps focus on the input element on arrow down when no input and hence no 
   await fireKeydown(target)
 
   expect(getByPlaceholderText(placeholder)).toHaveFocus()
+})
+
+test('focuses on the last suggestion on pressing up arrow when no exact match', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: [
+      { id: 'xyz', added: false, name: 'one' },
+      { id: 'abc', added: false, name: 'two' }
+    ]
+  })
+  const target = getByTestId('container')
+
+  await fireKeyup(target)
+
+  expect(getByText('two').closest('li')).toHaveFocus()
 })

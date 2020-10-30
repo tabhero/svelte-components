@@ -40,7 +40,7 @@ test('focuses on the prompt when no exact match on pressing TAB followed by down
   })
 
   userEvent.tab()
-  fireKeydown(getByTestId('container'))
+  await fireKeydown(getByTestId('container'))
 
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
@@ -54,8 +54,8 @@ test('focuses on the first suggestion when no exact match on pressing TAB follow
   })
 
   userEvent.tab()
-  fireKeydown(getByTestId('container'))
-  fireKeydown(getByTestId('container'))
+  await fireKeydown(getByTestId('container'))
+  await fireKeydown(getByTestId('container'))
 
   expect(getByText('one').closest('li')).toHaveFocus()
 })
@@ -69,9 +69,9 @@ test('wraps the focus around to the prompt when no exact match and arrow down go
   })
 
   userEvent.tab()
-  fireKeydown(getByTestId('container'))
-  fireKeydown(getByTestId('container'))
-  fireKeydown(getByTestId('container'))
+  await fireKeydown(getByTestId('container'))
+  await fireKeydown(getByTestId('container'))
+  await fireKeydown(getByTestId('container'))
 
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })

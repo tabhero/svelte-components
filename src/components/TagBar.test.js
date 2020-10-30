@@ -136,3 +136,14 @@ test('wraps the focus around to the last element when arrow up goes past the pro
 
   expect(getByText('two').closest('li')).toHaveFocus()
 })
+
+test('keeps focus on the input element on arrow up when no input and hence no suggestions present', async () => {
+  const { getByTestId, getByPlaceholderText } = render(TagBar, {})
+  getByPlaceholderText(placeholder).focus()
+  const target = getByTestId('container')
+
+  // act
+  await fireKeyup(target)
+
+  expect(getByPlaceholderText(placeholder)).toHaveFocus()
+})

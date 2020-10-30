@@ -27,7 +27,6 @@
     function handleKeydown(event) {
         const key = event.key;
         if (key == 'ArrowDown') {
-            focusRef.setAttribute('tabindex', '-1');
             focusRef.focus();
         }
     }
@@ -49,7 +48,7 @@
             {:else}
                 <ul>
                     {#if !exactMatchFound}
-                        <li class="new" on:click={e => handleNewClick(input)} bind:this={focusRef}>
+                        <li class="new" on:click={e => handleNewClick(input)} bind:this={focusRef} tabindex="-1">
                             <span>{input}</span>
                             <span class="item-prompt-wrapper">
                                 <span class="prompt">+Create New Tag and Add</span>

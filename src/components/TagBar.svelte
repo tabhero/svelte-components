@@ -7,7 +7,9 @@
     export let input = '';
     export let float = false;
     export let fill = false;
+
     const MAX_LEN = ADD_TAG_INPUT_MAX_LENGTH;
+    let focusRef;
 
     $: exactMatchFound = suggestions.find(tag => tag.name === input) !== undefined;
     $: empty = input === '';
@@ -22,9 +24,16 @@
             tagName: inputText
         });
     }
+    function handleKeydown(event) {
+        const key = event.key;
+        if (key == 'ArrowDown') {
+            focusRef.setAttribute('tabindex', '-1');
+            focusRef.focus();
+        }
+    }
 </script>
 
-<div class="container" class:float class:expand={fill && empty}>
+<div class="container" class:float class:expand={fill && empty} data-testid="container" on:keydown={handleKeydown}>
     <div class="input-container" class:empty class:expand={fill && empty}>
         <input
             bind:value={input}
@@ -40,7 +49,7 @@
             {:else}
                 <ul>
                     {#if !exactMatchFound}
-                        <li class="new" on:click={e => handleNewClick(input)}>
+                        <li class="new" on:click={e => handleNewClick(input)} bind:this={focusRef}>
                             <span>{input}</span>
                             <span class="item-prompt-wrapper">
                                 <span class="prompt">+Create New Tag and Add</span>

@@ -9,7 +9,8 @@
     export let fill = false;
 
     const MAX_LEN = ADD_TAG_INPUT_MAX_LENGTH;
-    let focusRef;
+    let suggestionsRef;
+    let focusRef = null;
 
     $: exactMatchFound = suggestions.find(tag => tag.name === input) !== undefined;
     $: empty = input === '';
@@ -27,6 +28,16 @@
     function handleKeydown(event) {
         const key = event.key;
         if (key == 'ArrowDown') {
+            if (focusRef === null) {
+                focusRef = suggestionsRef.firstElementChild;
+                focusRef.focus();
+                return;
+            }
+            const next = focusRef.nextElementSibling;
+            if (next === null) {
+                return;
+            }
+            focusRef = next;
             focusRef.focus();
         }
     }
@@ -46,9 +57,9 @@
                     <span class="prompt">Please add tags under {MAX_LEN + 1} characters only</span>
                 </div>
             {:else}
-                <ul>
+                <ul bind:this={suggestionsRef}>
                     {#if !exactMatchFound}
-                        <li class="new" on:click={e => handleNewClick(input)} bind:this={focusRef} tabindex="-1">
+                        <li class="new" on:click={e => handleNewClick(input)} tabindex="-1">
                             <span>{input}</span>
                             <span class="item-prompt-wrapper">
                                 <span class="prompt">+Create New Tag and Add</span>
@@ -56,7 +67,7 @@
                         </li>
                     {/if}
                     {#each suggestions as { id, added, name }}
-                        <li on:click={e => handleSuggestionClick(id)}>
+                        <li on:click={e => handleSuggestionClick(id)} tabindex="-1">
                             <span>{name}</span>
                             <span class="item-prompt-wrapper">
                                 {#if added}

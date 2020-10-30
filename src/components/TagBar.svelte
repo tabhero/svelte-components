@@ -28,6 +28,9 @@
     function handleKeydown(event) {
         const key = event.key;
         if (key == 'ArrowDown') {
+            if (suggestions.length === 0) {
+                return;
+            }
             if (focusRef === null) {
                 focusRef = suggestionsRef.firstElementChild;
                 focusRef.focus();

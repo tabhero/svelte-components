@@ -75,3 +75,13 @@ test('wraps the focus around to the prompt when arrow press down goes past the l
 
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
+
+test('keeps focus on the input element on arrow down when no input and hence no suggestions present', async () => {
+  const placeholder = 'Search from your tag library or create a new tag!'
+  const { getByTestId, getByPlaceholderText } = render(TagBar, {})
+
+  userEvent.tab()
+  await fireKeydown(getByTestId('container'))
+
+  expect(getByPlaceholderText(placeholder)).toHaveFocus()
+})

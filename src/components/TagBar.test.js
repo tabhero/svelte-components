@@ -16,186 +16,194 @@ const fireArrowUp = (domNode) => {
   return fireEvent.keyDown(domNode, { key: 'ArrowUp', code: 'ArrowUp' })
 }
 
- const placeholder = 'Search from your tag library or create a new tag!'
+const placeholder = 'Search from your tag library or create a new tag!'
 
-test('has an input element with the proper placeholder', () => {
-  const { getByPlaceholderText } = render(TagBar, {})
+describe('on render', () => {
+  test('has an input element with the proper placeholder', () => {
+    const { getByPlaceholderText } = render(TagBar, {})
 
-  expect(getByPlaceholderText(placeholder)).toBeInTheDocument()
-})
-
-test('has an input element that gets focused on pressing TAB', () => {
-  const { getByPlaceholderText } = render(TagBar, {})
-
-  userEvent.tab()
-
-  expect(getByPlaceholderText(placeholder)).toHaveFocus()
-})
-
-test('focuses on the prompt on pressing down arrow when no exact match', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' }
-    ]
+    expect(getByPlaceholderText(placeholder)).toBeInTheDocument()
   })
-  const target = getByTestId('container')
-
-  await fireArrowDown(target)
-
-  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
 
-test('focuses on the matched suggestion on pressing down arrow when exact match present', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'one',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' }
-    ]
+describe('on tab', () => {
+  test('has an input element that gets focused on pressing TAB', () => {
+    const { getByPlaceholderText } = render(TagBar, {})
+
+    userEvent.tab()
+
+    expect(getByPlaceholderText(placeholder)).toHaveFocus()
   })
-  const target = getByTestId('container')
-
-  await fireArrowDown(target)
-
-  expect(getByText('one').closest('li')).toHaveFocus()
 })
 
-test('focuses on the prompt on down arrow when some input but no suggestions present', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: []
+describe('on down arrow', () => {
+  test('focuses on the prompt on pressing down arrow when no exact match', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' }
+      ]
+    })
+    const target = getByTestId('container')
+
+    await fireArrowDown(target)
+
+    expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
   })
-  const target = getByTestId('container')
 
-  await fireArrowDown(target)
+  test('focuses on the matched suggestion on pressing down arrow when exact match present', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'one',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' }
+      ]
+    })
+    const target = getByTestId('container')
 
-  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
-})
+    await fireArrowDown(target)
 
-test('focuses on the first suggestion on pressing two down arrows when no exact match', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' }
-    ]
+    expect(getByText('one').closest('li')).toHaveFocus()
   })
-  const target = getByTestId('container')
 
-  await fireArrowDown(target)
-  await fireArrowDown(target)
+  test('focuses on the prompt on down arrow when some input but no suggestions present', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: []
+    })
+    const target = getByTestId('container')
 
-  expect(getByText('one').closest('li')).toHaveFocus()
-})
+    await fireArrowDown(target)
 
-test('wraps the focus around to the prompt when arrow press down goes past the last suggestion and no exact match', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' }
-    ]
+    expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
   })
-  const target = getByTestId('container')
 
-  await fireArrowDown(target)
-  await fireArrowDown(target)
-  await fireArrowDown(target)
+  test('focuses on the first suggestion on pressing two down arrows when no exact match', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' }
+      ]
+    })
+    const target = getByTestId('container')
 
-  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
-})
+    await fireArrowDown(target)
+    await fireArrowDown(target)
 
-test('keeps focus on the input element on arrow down when no input and hence no suggestions/prompt present', async () => {
-  const { getByTestId, getByPlaceholderText } = render(TagBar, {})
-  getByPlaceholderText(placeholder).focus()
-  const target = getByTestId('container')
-
-  // act
-  await fireArrowDown(target)
-
-  expect(getByPlaceholderText(placeholder)).toHaveFocus()
-})
-
-test('focuses on the last suggestion on pressing up arrow when no exact match', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' },
-      { id: 'abc', added: false, name: 'two' }
-    ]
+    expect(getByText('one').closest('li')).toHaveFocus()
   })
-  const target = getByTestId('container')
 
-  await fireArrowUp(target)
+  test('wraps the focus around to the prompt when arrow press down goes past the last suggestion and no exact match', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' }
+      ]
+    })
+    const target = getByTestId('container')
 
-  expect(getByText('two').closest('li')).toHaveFocus()
-})
+    await fireArrowDown(target)
+    await fireArrowDown(target)
+    await fireArrowDown(target)
 
-test('focuses on the matched suggestion on pressing up arrow when exact match present', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'one',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' }
-    ]
+    expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
   })
-  const target = getByTestId('container')
 
-  await fireArrowUp(target)
+  test('keeps focus on the input element on arrow down when no input and hence no suggestions/prompt present', async () => {
+    const { getByTestId, getByPlaceholderText } = render(TagBar, {})
+    getByPlaceholderText(placeholder).focus()
+    const target = getByTestId('container')
 
-  expect(getByText('one').closest('li')).toHaveFocus()
-})
+    // act
+    await fireArrowDown(target)
 
-test('focuses on the prompt on up arrow when some input but no suggestions present', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: []
+    expect(getByPlaceholderText(placeholder)).toHaveFocus()
   })
-  const target = getByTestId('container')
-
-  await fireArrowUp(target)
-
-  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
 
-test('focuses on the second last suggestion on pressing two up arrows when no exact match', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' },
-      { id: 'abc', added: false, name: 'two' }
-    ]
+describe('on up arrow', () => {
+  test('focuses on the last suggestion on pressing up arrow when no exact match', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' },
+        { id: 'abc', added: false, name: 'two' }
+      ]
+    })
+    const target = getByTestId('container')
+
+    await fireArrowUp(target)
+
+    expect(getByText('two').closest('li')).toHaveFocus()
   })
-  const target = getByTestId('container')
 
-  await fireArrowUp(target)
-  await fireArrowUp(target)
+  test('focuses on the matched suggestion on pressing up arrow when exact match present', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'one',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' }
+      ]
+    })
+    const target = getByTestId('container')
 
-  expect(getByText('one').closest('li')).toHaveFocus()
-})
+    await fireArrowUp(target)
 
-test('wraps the focus around to the last element when arrow up goes past the prompt suggestion and no exact match', async () => {
-  const { getByTestId, getByText } = render(TagBar, {
-    input: 'something',
-    suggestions: [
-      { id: 'xyz', added: false, name: 'one' },
-      { id: 'xyz', added: false, name: 'two' }
-    ]
+    expect(getByText('one').closest('li')).toHaveFocus()
   })
-  const target = getByTestId('container')
 
-  await fireArrowUp(target)
-  await fireArrowUp(target)
-  await fireArrowUp(target)
-  await fireArrowUp(target)
+  test('focuses on the prompt on up arrow when some input but no suggestions present', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: []
+    })
+    const target = getByTestId('container')
 
-  expect(getByText('two').closest('li')).toHaveFocus()
-})
+    await fireArrowUp(target)
 
-test('keeps focus on the input element on arrow up when no input and hence no suggestions/prompt present', async () => {
-  const { getByTestId, getByPlaceholderText } = render(TagBar, {})
-  getByPlaceholderText(placeholder).focus()
-  const target = getByTestId('container')
+    expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
+  })
 
-  // act
-  await fireArrowUp(target)
+  test('focuses on the second last suggestion on pressing two up arrows when no exact match', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' },
+        { id: 'abc', added: false, name: 'two' }
+      ]
+    })
+    const target = getByTestId('container')
 
-  expect(getByPlaceholderText(placeholder)).toHaveFocus()
+    await fireArrowUp(target)
+    await fireArrowUp(target)
+
+    expect(getByText('one').closest('li')).toHaveFocus()
+  })
+
+  test('wraps the focus around to the last element when arrow up goes past the prompt suggestion and no exact match', async () => {
+    const { getByTestId, getByText } = render(TagBar, {
+      input: 'something',
+      suggestions: [
+        { id: 'xyz', added: false, name: 'one' },
+        { id: 'xyz', added: false, name: 'two' }
+      ]
+    })
+    const target = getByTestId('container')
+
+    await fireArrowUp(target)
+    await fireArrowUp(target)
+    await fireArrowUp(target)
+    await fireArrowUp(target)
+
+    expect(getByText('two').closest('li')).toHaveFocus()
+  })
+
+  test('keeps focus on the input element on arrow up when no input and hence no suggestions/prompt present', async () => {
+    const { getByTestId, getByPlaceholderText } = render(TagBar, {})
+    getByPlaceholderText(placeholder).focus()
+    const target = getByTestId('container')
+
+    // act
+    await fireArrowUp(target)
+
+    expect(getByPlaceholderText(placeholder)).toHaveFocus()
+  })
 })

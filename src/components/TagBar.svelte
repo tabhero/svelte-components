@@ -39,7 +39,7 @@
             }
             focusRef.focus();
         } else if (key === 'ArrowUp') {
-            if (suggestions.length === 0) {
+            if (empty) {
                 return;
             }
             if (focusRef === null) {

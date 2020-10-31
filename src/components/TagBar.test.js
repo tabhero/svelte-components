@@ -9,10 +9,10 @@ import TagBar from './TagBar'
  *   - https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event
  */
 
-const fireKeydown = (domNode) => {
+const fireArrowDown = (domNode) => {
   return fireEvent.keyDown(domNode, { key: 'ArrowDown', code: 'ArrowDown' })
 }
-const fireKeyup = (domNode) => {
+const fireArrowUp = (domNode) => {
   return fireEvent.keyDown(domNode, { key: 'ArrowUp', code: 'ArrowUp' })
 }
 
@@ -41,7 +41,31 @@ test('focuses on the prompt on pressing down arrow when no exact match', async (
   })
   const target = getByTestId('container')
 
-  await fireKeydown(target)
+  await fireArrowDown(target)
+
+  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
+})
+
+test('focuses on the prompt on down arrow when some input but no suggestions present', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: []
+  })
+  const target = getByTestId('container')
+
+  await fireArrowDown(target)
+
+  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
+})
+
+test('focuses on the prompt on up arrow when some input but no suggestions present', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: []
+  })
+  const target = getByTestId('container')
+
+  await fireArrowUp(target)
 
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
@@ -55,8 +79,8 @@ test('focuses on the first suggestion on pressing two down arrows when no exact 
   })
   const target = getByTestId('container')
 
-  await fireKeydown(target)
-  await fireKeydown(target)
+  await fireArrowDown(target)
+  await fireArrowDown(target)
 
   expect(getByText('one').closest('li')).toHaveFocus()
 })
@@ -70,9 +94,9 @@ test('wraps the focus around to the prompt when arrow press down goes past the l
   })
   const target = getByTestId('container')
 
-  await fireKeydown(target)
-  await fireKeydown(target)
-  await fireKeydown(target)
+  await fireArrowDown(target)
+  await fireArrowDown(target)
+  await fireArrowDown(target)
 
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
@@ -83,7 +107,7 @@ test('keeps focus on the input element on arrow down when no input and hence no 
   const target = getByTestId('container')
 
   // act
-  await fireKeydown(target)
+  await fireArrowDown(target)
 
   expect(getByPlaceholderText(placeholder)).toHaveFocus()
 })
@@ -98,7 +122,7 @@ test('focuses on the last suggestion on pressing up arrow when no exact match', 
   })
   const target = getByTestId('container')
 
-  await fireKeyup(target)
+  await fireArrowUp(target)
 
   expect(getByText('two').closest('li')).toHaveFocus()
 })
@@ -113,8 +137,8 @@ test('focuses on the second last suggestion on pressing two up arrows when no ex
   })
   const target = getByTestId('container')
 
-  await fireKeyup(target)
-  await fireKeyup(target)
+  await fireArrowUp(target)
+  await fireArrowUp(target)
 
   expect(getByText('one').closest('li')).toHaveFocus()
 })
@@ -129,10 +153,10 @@ test('wraps the focus around to the last element when arrow up goes past the pro
   })
   const target = getByTestId('container')
 
-  await fireKeyup(target)
-  await fireKeyup(target)
-  await fireKeyup(target)
-  await fireKeyup(target)
+  await fireArrowUp(target)
+  await fireArrowUp(target)
+  await fireArrowUp(target)
+  await fireArrowUp(target)
 
   expect(getByText('two').closest('li')).toHaveFocus()
 })
@@ -143,7 +167,7 @@ test('keeps focus on the input element on arrow up when no input and hence no su
   const target = getByTestId('container')
 
   // act
-  await fireKeyup(target)
+  await fireArrowUp(target)
 
   expect(getByPlaceholderText(placeholder)).toHaveFocus()
 })

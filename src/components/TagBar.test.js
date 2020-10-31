@@ -103,7 +103,7 @@ test('wraps the focus around to the prompt when arrow press down goes past the l
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
 
-test('keeps focus on the input element on arrow down when no input and hence no suggestions present', async () => {
+test('keeps focus on the input element on arrow down when no input and hence no suggestions/prompt present', async () => {
   const { getByTestId, getByPlaceholderText } = render(TagBar, {})
   getByPlaceholderText(placeholder).focus()
   const target = getByTestId('container')
@@ -189,7 +189,7 @@ test('wraps the focus around to the last element when arrow up goes past the pro
   expect(getByText('two').closest('li')).toHaveFocus()
 })
 
-test('keeps focus on the input element on arrow up when no input and hence no suggestions present', async () => {
+test('keeps focus on the input element on arrow up when no input and hence no suggestions/prompt present', async () => {
   const { getByTestId, getByPlaceholderText } = render(TagBar, {})
   getByPlaceholderText(placeholder).focus()
   const target = getByTestId('container')

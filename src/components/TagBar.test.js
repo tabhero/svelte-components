@@ -2,6 +2,7 @@ import { render, fireEvent } from '@testing-library/svelte'
 import userEvent from '@testing-library/user-event'
 
 import TagBar from './TagBar'
+import { ADD_TAG_INPUT_MAX_LENGTH } from '../constants';
 
 /**
  * Notes:
@@ -17,6 +18,7 @@ const fireArrowUp = (domNode) => {
 }
 
 const placeholder = 'Search from your tag library or create a new tag!'
+const maxInputLength = ADD_TAG_INPUT_MAX_LENGTH
 
 describe('on render', () => {
   test('has an input element with the proper placeholder', () => {
@@ -110,6 +112,19 @@ describe('on down arrow', () => {
 
   test('keeps focus on the input element on arrow down when no input and hence no suggestions/prompt present', async () => {
     const { getByTestId, getByPlaceholderText } = render(TagBar, {})
+    getByPlaceholderText(placeholder).focus()
+    const target = getByTestId('container')
+
+    // act
+    await fireArrowDown(target)
+
+    expect(getByPlaceholderText(placeholder)).toHaveFocus()
+  })
+
+  test('keeps focus on the input element on arrow down when input exceeds max allowed length', async () => {
+    const { getByTestId, getByPlaceholderText } = render(TagBar, {
+      input: Array(maxInputLength + 1).fill('c').join('')
+    })
     getByPlaceholderText(placeholder).focus()
     const target = getByTestId('container')
 

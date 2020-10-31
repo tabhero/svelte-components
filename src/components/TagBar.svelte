@@ -14,6 +14,7 @@
 
     $: exactMatchFound = suggestions.find(tag => tag.name === input) !== undefined;
     $: empty = input === '';
+    $: exceededMaxLength = input.length > MAX_LEN;
 
     const dispatch = createEventDispatcher();
 
@@ -28,7 +29,7 @@
     function handleKeydown(event) {
         const key = event.key;
         if (key === 'ArrowDown') {
-            if (empty) {
+            if (empty || exceededMaxLength) {
                 return;
             }
             if (focusRef === null) {
@@ -62,7 +63,7 @@
     </div>
     {#if !empty}
         <div class="suggestions-container" class:float>
-            {#if input.length > MAX_LEN}
+            {#if exceededMaxLength}
                 <div class="info-prompt-wrapper">
                     <span class="prompt">Please add tags under {MAX_LEN + 1} characters only</span>
                 </div>

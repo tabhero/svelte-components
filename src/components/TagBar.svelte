@@ -40,7 +40,7 @@
             }
             focusRef.focus();
         } else if (key === 'ArrowUp') {
-            if (empty) {
+            if (empty || exceededMaxLength) {
                 return;
             }
             if (focusRef === null) {

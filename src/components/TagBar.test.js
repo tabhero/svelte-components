@@ -221,4 +221,17 @@ describe('on up arrow', () => {
 
     expect(getByPlaceholderText(placeholder)).toHaveFocus()
   })
+
+  test('keeps focus on the input element on arrow up when input exceeds max allowed length', async () => {
+    const { getByTestId, getByPlaceholderText } = render(TagBar, {
+      input: Array(maxInputLength + 1).fill('c').join('')
+    })
+    getByPlaceholderText(placeholder).focus()
+    const target = getByTestId('container')
+
+    // act
+    await fireArrowUp(target)
+
+    expect(getByPlaceholderText(placeholder)).toHaveFocus()
+  })
 })

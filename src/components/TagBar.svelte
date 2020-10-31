@@ -9,8 +9,7 @@
     export let fill = false;
 
     const MAX_LEN = ADD_TAG_INPUT_MAX_LENGTH;
-    let suggestionsRef;
-    let focusRef = null;
+    let focusIndex = null;
 
     $: exactMatchFound = suggestions.find(tag => tag.name === input) !== undefined;
     $: empty = input === '';
@@ -32,25 +31,47 @@
             if (empty || exceededMaxLength) {
                 return;
             }
-            if (focusRef === null) {
-                focusRef = suggestionsRef.firstElementChild;
+            if (focusIndex === null) {
+                focusIndex = 0;
             } else {
-                const next = focusRef.nextElementSibling || suggestionsRef.firstElementChild;
-                focusRef = next;
+                focusIndex = (focusIndex + 1) > suggestions.length
+                    ? 0
+                    : (focusIndex + 1);
             }
-            focusRef.focus();
         } else if (key === 'ArrowUp') {
             if (empty || exceededMaxLength) {
                 return;
             }
-            if (focusRef === null) {
-                focusRef = suggestionsRef.lastElementChild;
+            if (focusIndex === null) {
+                // the existence of prompt causes the suggestions to shift one index forward in the markup
+                // hence, assign index to .length
+                focusIndex = exactMatchFound
+                    ? suggestions.length - 1
+                    : suggestions.length
             } else {
-                const prev = focusRef.previousElementSibling || suggestionsRef.lastElementChild;
-                focusRef = prev;
+                focusIndex = (focusIndex - 1) < 0
+                    ? suggestions.length
+                    : (focusIndex - 1);
             }
-            focusRef.focus();
         }
+    }
+    function focusNode(node, { listIndex, focusIndex }) {
+        if (focusIndex === listIndex) {
+            node.focus();
+        }
+        return {
+            update({ listIndex, focusIndex }) {
+                if (focusIndex === listIndex) {
+                    node.focus();
+                }
+            }
+        };
+    }
+    function suggestionIndex(index) {
+        if (exactMatchFound) {
+            return index;
+        }
+        return index + 1;
     }
 </script>
 
@@ -68,17 +89,17 @@
                     <span class="prompt">Please add tags under {MAX_LEN + 1} characters only</span>
                 </div>
             {:else}
-                <ul bind:this={suggestionsRef}>
+                <ul>
                     {#if !exactMatchFound}
-                        <li class="new" on:click={e => handleNewClick(input)} tabindex="-1">
+                        <li class="new" on:click={e => handleNewClick(input)} tabindex="-1" use:focusNode={{ listIndex: 0, focusIndex }}>
                             <span>{input}</span>
                             <span class="item-prompt-wrapper">
                                 <span class="prompt">+Create New Tag and Add</span>
                             </span>
                         </li>
                     {/if}
-                    {#each suggestions as { id, added, name }}
-                        <li on:click={e => handleSuggestionClick(id)} tabindex="-1">
+                    {#each suggestions as { id, added, name }, i}
+                        <li on:click={e => handleSuggestionClick(id)} tabindex="-1" use:focusNode={{ listIndex: suggestionIndex(i), focusIndex }}>
                             <span>{name}</span>
                             <span class="item-prompt-wrapper">
                                 {#if added}

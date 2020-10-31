@@ -23,23 +23,32 @@ export const EmptyInput = () => ({
     on: eventHandlers,
 });
 
+export const NoSuggestions = () => ({
+  Component: TagBar,
+  props: {
+      input: 'Go',
+      suggestions: [],
+  },
+  on: eventHandlers,
+});
+
+export const FewSuggestions = () => ({
+  Component: TagBar,
+  props: {
+      input: 'Go',
+      suggestions: [
+          { id: 'xyz', added: false, name: 'Goa' },
+          { id: 'xyz', added: false, name: 'Google' }
+      ],
+  },
+  on: eventHandlers,
+});
+
 export const ManySuggestions = () => ({
     Component: TagBar,
     props: {
         input: 'G',
         suggestions: Array(10).fill({ id: 'xyz', added: false, name: 'Google' }),
-    },
-    on: eventHandlers,
-});
-
-export const FewSuggestions = () => ({
-    Component: TagBar,
-    props: {
-        input: 'Go',
-        suggestions: [
-            { id: 'xyz', added: false, name: 'Goa' },
-            { id: 'xyz', added: false, name: 'Google' }
-        ],
     },
     on: eventHandlers,
 });

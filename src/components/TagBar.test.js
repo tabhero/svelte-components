@@ -46,6 +46,18 @@ test('focuses on the prompt on pressing down arrow when no exact match', async (
   expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
 })
 
+test('focuses on the prompt on down arrow when some input but no suggestions present', async () => {
+  const { getByTestId, getByText } = render(TagBar, {
+    input: 'something',
+    suggestions: []
+  })
+  const target = getByTestId('container')
+
+  await fireKeydown(target)
+
+  expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus()
+})
+
 test('focuses on the first suggestion on pressing two down arrows when no exact match', async () => {
   const { getByTestId, getByText } = render(TagBar, {
     input: 'something',

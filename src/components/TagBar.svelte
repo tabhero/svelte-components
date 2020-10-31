@@ -28,7 +28,7 @@
     function handleKeydown(event) {
         const key = event.key;
         if (key === 'ArrowDown') {
-            if (suggestions.length === 0) {
+            if (empty) {
                 return;
             }
             if (focusRef === null) {

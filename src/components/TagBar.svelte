@@ -109,7 +109,12 @@
             {:else}
                 <ul>
                     {#if !exactMatchFound}
-                        <li class="new" on:click={e => handleNewClick(input)} on:keydown={e => handleNewKeydown(e, input)} tabindex="-1" use:focusNode={{ listIndex: 0, focusIndex }}>
+                        <li class="new"
+                            on:click={e => handleNewClick(input)}
+                            on:keydown={e => handleNewKeydown(e, input)}
+                            tabindex="-1"
+                            use:focusNode={{ listIndex: 0, focusIndex }}
+                        >
                             <span>{input}</span>
                             <span class="item-prompt-wrapper">
                                 <span class="prompt">+Create New Tag and Add</span>
@@ -117,7 +122,11 @@
                         </li>
                     {/if}
                     {#each suggestions as { id, added, name }, i}
-                        <li on:click={e => handleSuggestionClick(id)} on:keydown={e => handleSuggestionKeydown(e, id)} tabindex="-1" use:focusNode={{ listIndex: suggestionIndex(i), focusIndex }}>
+                        <li on:click={e => handleSuggestionClick(id)}
+                            on:keydown={e => handleSuggestionKeydown(e, id)}
+                            tabindex="-1"
+                            use:focusNode={{ listIndex: suggestionIndex(i), focusIndex }}
+                        >
                             <span>{name}</span>
                             <span class="item-prompt-wrapper">
                                 {#if added}

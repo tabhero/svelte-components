@@ -42,6 +42,7 @@
     function handleKeydown(event) {
         const key = event.key;
         if (key === 'ArrowDown') {
+            event.preventDefault();
             if (empty || exceededMaxLength) {
                 return;
             }
@@ -53,6 +54,7 @@
                     : (focusIndex + 1);
             }
         } else if (key === 'ArrowUp') {
+            event.preventDefault();
             if (empty || exceededMaxLength) {
                 return;
             }
@@ -227,6 +229,13 @@
         background-color: var(--col-primary);
     }
     li:hover * {
+        color: var(--col-light-primary);
+    }
+    li:focus {
+        background-color: var(--col-tertiary);
+        outline: 0;
+    }
+    li:focus * {
         color: var(--col-light-primary);
     }
 

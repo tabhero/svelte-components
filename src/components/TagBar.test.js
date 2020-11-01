@@ -53,6 +53,27 @@ describe('on down arrow', () => {
         expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus();
     });
 
+    test('focuses on the prompt on down arrow when no exact match and some suggestion had been focused on before', async () => {
+        const { getByTestId, getByText, getByPlaceholderText } = render(TagBar, {
+            input: 'something',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' },
+                { id: 'abc', added: false, name: 'two' }
+            ]
+        });
+        const target = getByTestId('container');
+
+        // arrange
+        await fireArrowDown(target);  // focus on prompt
+        await fireArrowDown(target);  // focus on first suggestion
+        getByPlaceholderText(placeholder).focus();  // re-focus on the input
+
+        // act
+        await fireArrowDown(target);
+
+        expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus();
+    });
+
     test('focuses on the matched suggestion on pressing down arrow when exact match present', async () => {
         const { getByTestId, getByText } = render(TagBar, {
             input: 'one',
@@ -165,6 +186,27 @@ describe('on up arrow', () => {
         });
         const target = getByTestId('container');
 
+        await fireArrowUp(target);
+
+        expect(getByText('two').closest('li')).toHaveFocus();
+    });
+
+    test('focuses on the last suggestion on up arrow when no exact match and some suggestion had been focused on before', async () => {
+        const { getByTestId, getByText, getByPlaceholderText } = render(TagBar, {
+            input: 'something',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' },
+                { id: 'abc', added: false, name: 'two' }
+            ]
+        });
+        const target = getByTestId('container');
+
+        // arrange
+        await fireArrowDown(target);  // focus on prompt
+        await fireArrowDown(target);  // focus on first suggestion
+        getByPlaceholderText(placeholder).focus();  // re-focus on the input
+
+        // act
         await fireArrowUp(target);
 
         expect(getByText('two').closest('li')).toHaveFocus();

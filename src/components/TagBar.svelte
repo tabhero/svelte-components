@@ -31,6 +31,12 @@
             tagName: inputText
         });
     }
+    function handleNewKeydown(event, inputText) {
+        const key = event.key;
+        if (key === 'Enter') {
+            handleNewClick(inputText);
+        }
+    }
     function handleKeydown(event) {
         const key = event.key;
         if (key === 'ArrowDown') {
@@ -101,7 +107,7 @@
             {:else}
                 <ul>
                     {#if !exactMatchFound}
-                        <li class="new" on:click={e => handleNewClick(input)} tabindex="-1" use:focusNode={{ listIndex: 0, focusIndex }}>
+                        <li class="new" on:click={e => handleNewClick(input)} on:keydown={e => handleNewKeydown(e, input)} tabindex="-1" use:focusNode={{ listIndex: 0, focusIndex }}>
                             <span>{input}</span>
                             <span class="item-prompt-wrapper">
                                 <span class="prompt">+Create New Tag and Add</span>

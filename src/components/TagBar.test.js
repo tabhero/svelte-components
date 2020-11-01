@@ -316,3 +316,33 @@ describe('on up arrow', () => {
         expect(getByPlaceholderText(placeholder)).toHaveFocus();
     });
 });
+
+describe('on updating the suggestions prop', () => {
+    test.skip('re-focuses on the new last suggestion on losing the last suggestion that was previously focused on when no exact match', async () => {
+        const { getByTestId, getByText, rerender } = render(TagBar, {
+            input: 'something',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' },
+                { id: 'abc', added: false, name: 'two' }
+            ]
+        });
+        const target = getByTestId('container');
+
+        // arrange
+        await fireArrowDown(target);  // focus on prompt
+        await fireArrowDown(target);  // focus on first suggestion
+        await fireArrowDown(target);  // focus on last suggestion
+
+        // act
+        rerender({
+            props: {
+                input: 'something',
+                suggestions: [
+                    { id: 'xyz', added: false, name: 'one' }
+                ]
+            }
+        });
+
+        expect(getByText('one').closest('li')).toHaveFocus();
+    });
+});

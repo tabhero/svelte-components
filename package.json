@@ -64,6 +64,9 @@
       "^.+\\.js$": "babel-jest",
       "^.+\\.svelte$": "svelte-jester"
     },
+    "moduleNameMapper": {
+      "^lodash-es$": "lodash"
+    },
     "moduleFileExtensions": [
       "js",
       "svelte"

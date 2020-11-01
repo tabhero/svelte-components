@@ -30,12 +30,35 @@ describe('on render', () => {
 });
 
 describe('on tab', () => {
-    test('has an input element that gets focused on pressing TAB', () => {
+    test('has an input element that gets focused on pressing tab', () => {
         const { getByPlaceholderText } = render(TagBar, {});
 
         userEvent.tab();
 
         expect(getByPlaceholderText(placeholder)).toHaveFocus();
+    });
+
+    test('focus leaves this component on pressing two tabs when no input present', () => {
+        const { container } = render(TagBar, {});
+
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
+    });
+
+    test('focus leaves this component on pressing two tabs when no suggestion/prompt has been focused on before', () => {
+        const { container } = render(TagBar, {
+            input: 'something',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' }
+            ]
+        });
+
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
     });
 });
 

@@ -67,6 +67,25 @@ describe('on down arrow', () => {
         expect(getByText('one').closest('li')).toHaveFocus();
     });
 
+    test('focuses on the matched suggestion on down arrow when exact match present and it had been focused on before', async () => {
+        const { getByTestId, getByText, getByPlaceholderText } = render(TagBar, {
+            input: 'one',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' }
+            ]
+        });
+        const target = getByTestId('container');
+
+        // arrange
+        await fireArrowDown(target);
+        getByPlaceholderText(placeholder).focus();  // re-focus on the input after having focused on the exact match
+
+        // act
+        await fireArrowDown(target);
+
+        expect(getByText('one').closest('li')).toHaveFocus();
+    });
+
     test('focuses on the prompt on down arrow when some input but no suggestions present', async () => {
         const { getByTestId, getByText } = render(TagBar, {
             input: 'something',
@@ -160,6 +179,25 @@ describe('on up arrow', () => {
         });
         const target = getByTestId('container');
 
+        await fireArrowUp(target);
+
+        expect(getByText('one').closest('li')).toHaveFocus();
+    });
+
+    test('focuses on the matched suggestion on up arrow when exact match present and it had been focused on before', async () => {
+        const { getByTestId, getByText, getByPlaceholderText } = render(TagBar, {
+            input: 'one',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' }
+            ]
+        });
+        const target = getByTestId('container');
+
+        // arrange
+        await fireArrowDown(target);
+        getByPlaceholderText(placeholder).focus();  // re-focus on the input after having focused on the exact match
+
+        // act
         await fireArrowUp(target);
 
         expect(getByText('one').closest('li')).toHaveFocus();

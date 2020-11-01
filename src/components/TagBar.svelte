@@ -55,6 +55,9 @@
             }
         }
     }
+    function handleInputFocus() {
+        focusIndex = null;
+    }
     function focusNode(node, { listIndex, focusIndex }) {
         if (focusIndex === listIndex) {
             node.focus();
@@ -80,7 +83,8 @@
         <input
             bind:value={input}
             type="text"
-            placeholder="Search from your tag library or create a new tag!">
+            placeholder="Search from your tag library or create a new tag!"
+            on:focus={handleInputFocus}>
     </div>
     {#if !empty}
         <div class="suggestions-container" class:float>

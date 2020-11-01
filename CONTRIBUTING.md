@@ -36,6 +36,16 @@ These are the resources used to learn how to set up this project. Some of them h
 
 - https://resources.whitesourcesoftware.com/blog-whitesource/open-source-licenses-explained
 
+### Testing
+
+- Ensuring that the components look correct in different states and that they emit the correct events is done with [Storybook](https://www.learnstorybook.com/intro-to-storybook/svelte/en/get-started/).
+- Ensuring that components behave correctly given various user inputs, etc is done with [Testing Library](https://testing-library.com/docs/svelte-testing-library/intro).
+- Each component has two types of interfaces:
+    - those that face the end user (the styles, response to keyboard events, etc)
+    - those that face the developer using this library (the props required and the events emitted by the components)
+
+    More useful info on this from [Kent C. Dodds](https://kentcdodds.com/blog/avoid-the-test-user). Since Testing Library is end-user-centric, the test suite focuses on the end user interfaces. As a result, we currently lack any testing for the events emitted by the Svelte components (developer-facing). For these events, all we're doing is manually checking to see if they're emitted using Storybook.
+
 ## Design Decisions
 
 - :white_check_mark: __We can now pass in child components__

@@ -18,6 +18,7 @@ const fireArrowUp = (domNode) => {
 };
 
 const placeholder = 'Search from your tag library or create a new tag!';
+const prompt = '+Create New Tag and Add';
 const maxInputLength = ADD_TAG_INPUT_MAX_LENGTH;
 
 describe('on render', () => {
@@ -50,7 +51,7 @@ describe('on down arrow', () => {
 
         await fireArrowDown(target);
 
-        expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus();
+        expect(getByText(prompt).closest('li')).toHaveFocus();
     });
 
     test('focuses on the prompt on down arrow when no exact match and some suggestion had been focused on before', async () => {
@@ -71,7 +72,7 @@ describe('on down arrow', () => {
         // act
         await fireArrowDown(target);
 
-        expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus();
+        expect(getByText(prompt).closest('li')).toHaveFocus();
     });
 
     test('focuses on the matched suggestion on pressing down arrow when exact match present', async () => {
@@ -116,7 +117,7 @@ describe('on down arrow', () => {
 
         await fireArrowDown(target);
 
-        expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus();
+        expect(getByText(prompt).closest('li')).toHaveFocus();
     });
 
     test('focuses on the first suggestion on pressing two down arrows when no exact match', async () => {
@@ -147,7 +148,7 @@ describe('on down arrow', () => {
         await fireArrowDown(target);
         await fireArrowDown(target);
 
-        expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus();
+        expect(getByText(prompt).closest('li')).toHaveFocus();
     });
 
     test('keeps focus on the input element on arrow down when no input and hence no suggestions/prompt present', async () => {
@@ -254,7 +255,7 @@ describe('on up arrow', () => {
 
         await fireArrowUp(target);
 
-        expect(getByText('+Create New Tag and Add').closest('li')).toHaveFocus();
+        expect(getByText(prompt).closest('li')).toHaveFocus();
     });
 
     test('focuses on the second last suggestion on pressing two up arrows when no exact match', async () => {

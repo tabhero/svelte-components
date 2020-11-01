@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import { clamp } from 'lodash-es';
 
     import { ADD_TAG_INPUT_MAX_LENGTH } from '../constants';
 
@@ -14,6 +15,7 @@
     $: exactMatchFound = suggestions.find(tag => tag.name === input) !== undefined;
     $: empty = input === '';
     $: exceededMaxLength = input.length > MAX_LEN;
+    $: focusIndex = focusIndex ? clamp(focusIndex, suggestions.length) : focusIndex;
 
     const dispatch = createEventDispatcher();
 

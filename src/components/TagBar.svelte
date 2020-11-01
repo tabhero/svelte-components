@@ -20,6 +20,12 @@
     function handleSuggestionClick(tagId) {
         dispatch('selectSuggestion', { tagId });
     }
+    function handleSuggestionKeydown(event, tagId) {
+        const key = event.key;
+        if (key === 'Enter') {
+            handleSuggestionClick(tagId);
+        }
+    }
     function handleNewClick(inputText) {
         dispatch('selectNew', {
             tagName: inputText
@@ -103,7 +109,7 @@
                         </li>
                     {/if}
                     {#each suggestions as { id, added, name }, i}
-                        <li on:click={e => handleSuggestionClick(id)} tabindex="-1" use:focusNode={{ listIndex: suggestionIndex(i), focusIndex }}>
+                        <li on:click={e => handleSuggestionClick(id)} on:keydown={e => handleSuggestionKeydown(e, id)} tabindex="-1" use:focusNode={{ listIndex: suggestionIndex(i), focusIndex }}>
                             <span>{name}</span>
                             <span class="item-prompt-wrapper">
                                 {#if added}

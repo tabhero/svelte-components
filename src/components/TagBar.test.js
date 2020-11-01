@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/svelte';
+import { render, fireEvent, act } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 
 import TagBar from './TagBar';
@@ -30,12 +30,74 @@ describe('on render', () => {
 });
 
 describe('on tab', () => {
-    test('has an input element that gets focused on pressing TAB', () => {
+    test('has an input element that gets focused on pressing tab', () => {
         const { getByPlaceholderText } = render(TagBar, {});
 
         userEvent.tab();
 
         expect(getByPlaceholderText(placeholder)).toHaveFocus();
+    });
+
+    test('focus leaves this component on pressing two tabs when no input present', () => {
+        const { container } = render(TagBar, {});
+
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
+    });
+
+    test('focus leaves this component on pressing two tabs when no suggestion/prompt has been focused on before', () => {
+        const { container } = render(TagBar, {
+            input: 'something',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' }
+            ]
+        });
+
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
+    });
+
+    test('focus leaves this component on pressing tab when the prompt has been focused on before', async () => {
+        const { getByTestId, getByPlaceholderText, container } = render(TagBar, {
+            input: 'something',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' }
+            ]
+        });
+        const target = getByTestId('container');
+
+        // arrange
+        await fireArrowDown(target);
+        await act(() => getByPlaceholderText(placeholder).focus());
+
+        // act
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
+    });
+
+    test('focus leaves this component on pressing tab when some suggestion has been focused on before', async () => {
+        const { getByTestId, getByPlaceholderText, container } = render(TagBar, {
+            input: 'something',
+            suggestions: [
+                { id: 'xyz', added: false, name: 'one' }
+            ]
+        });
+        const target = getByTestId('container');
+
+        // arrange
+        await fireArrowDown(target);
+        await fireArrowDown(target);
+        await act(() => getByPlaceholderText(placeholder).focus());
+
+        // act
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
     });
 });
 

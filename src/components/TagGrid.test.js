@@ -12,8 +12,8 @@ const tags = [
     { id: 'xyz', added: false, name: 'Medium' },
 ];
 
-describe('roving tabindex', () => {
-    test('on tab press: focuses on the tag grid', () => {
+describe('on tab press', () => {
+    test('one tab: focuses on the tag grid', () => {
         const { getByTestId } = render(TagGrid, { tags });
 
         userEvent.tab();
@@ -21,7 +21,7 @@ describe('roving tabindex', () => {
         expect(getByTestId('container')).toHaveFocus();
     });
 
-    test('on two tab presses: focuses on the first tag', () => {
+    test('two tabs: focuses on the first tag', () => {
         const { getByText } = render(TagGrid, { tags });
         const expectedTagName = tags[0].name;
 
@@ -31,7 +31,7 @@ describe('roving tabindex', () => {
         expect(getByText(expectedTagName).closest('.container')).toHaveFocus();
     });
 
-    test('on three tab presses: focus leaves the component', () => {
+    test('three tabs: focus leaves the component', () => {
         const { container } = render(TagGrid, { tags });
 
         userEvent.tab();

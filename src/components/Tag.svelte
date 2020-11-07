@@ -10,6 +10,12 @@
     const handleClick = () => {
         dispatch('click');
     };
+    const handleKeyDown = (event) => {
+        const key = event.key;
+        if (key === 'Enter') {
+            dispatch('click');
+        }
+    };
 </script>
 
 <style>
@@ -51,6 +57,10 @@
     /* TODO: include hover case for feedback */
 </style>
 
-<div class="container" class:added on:click|stopPropagation={handleClick} {tabindex}>
+<div class="container"
+    class:added
+    on:click|stopPropagation={handleClick}
+    on:keydown={handleKeyDown}
+    {tabindex}>
     <div class="text" class:added>{name}</div>
 </div>

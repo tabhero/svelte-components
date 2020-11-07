@@ -19,8 +19,15 @@
         border-radius: 1.5rem;
         width: 16ch;  /* few ch higher than .text width */
     }
+    .container:focus {
+        outline: 0;
+        box-shadow: 0 0 0 2px var(--col-focus);
+    }
     .container.added {
         background-color: var(--col-primary);
+    }
+    .container.added:focus {
+        border: solid 0.5px var(--col-light-primary);
     }
 
     .text {

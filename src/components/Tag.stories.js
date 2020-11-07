@@ -43,10 +43,20 @@ export const NotAddedLong = () => ({
     on: { click: action('clicked') },
 });
 
-export const InTabOrder = () => ({
+export const NotAddedInTabOrder = () => ({
     Component: Tag,
     props: {
         name: 'Study Philosophy',
+        tabindex: 0
+    },
+    on: { click: action('clicked') },
+});
+
+export const AddedInTabOrder = () => ({
+    Component: Tag,
+    props: {
+        name: 'Study Philosophy',
+        added: true,
         tabindex: 0
     },
     on: { click: action('clicked') },

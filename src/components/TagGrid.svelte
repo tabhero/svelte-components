@@ -9,6 +9,8 @@
 
     const dispatch = createEventDispatcher();
     const numCols = 2;
+    let focusRowIndex = 0;
+    let focusColIndex = 0;
 
     $: rows = zipWith(range(minRows), chunk(tags, numCols), (i, _tags) => {
         _tags = _tags === undefined
@@ -16,6 +18,12 @@
             : _tags;
         return [i, _tags];
     });
+
+    function getTabIndex(rowIndex, colIndex) {
+        return (rowIndex === focusRowIndex && colIndex === focusColIndex)
+            ? '0'
+            : '-1';
+    }
 </script>
 
 <style>
@@ -40,11 +48,11 @@
 </style>
 
 <div class="container" data-testid="container" tabindex="0">
-    {#each rows as [i, cells]}
+    {#each rows as [i, cells], rowInd}
         <div class="grid-row">
-            {#each cells as tag}
+            {#each cells as tag, colInd}
                 <div class="grid-cell">
-                    <Tag name={tag.name} added={tag.added} tabindex="0" on:click={e => dispatch('tagClick', { tagId: tag.id })} />
+                    <Tag name={tag.name} added={tag.added} tabindex={getTabIndex(rowInd, colInd)} on:click={e => dispatch('tagClick', { tagId: tag.id })} />
                 </div>
             {/each}
         </div>

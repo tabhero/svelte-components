@@ -30,5 +30,15 @@ describe('roving tabindex', () => {
 
         expect(getByText(expectedTagName).closest('.container')).toHaveFocus();
     });
+
+    test('on three tab presses: focus leaves the component', () => {
+        const { container } = render(TagGrid, { tags });
+
+        userEvent.tab();
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
+    });
 });
 

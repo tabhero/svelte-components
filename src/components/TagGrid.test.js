@@ -20,5 +20,15 @@ describe('roving tabindex', () => {
 
         expect(getByTestId('container')).toHaveFocus();
     });
+
+    test('on two tab presses: focuses on the first tag', () => {
+        const { getByText } = render(TagGrid, { tags });
+        const expectedTagName = tags[0].name;
+
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(getByText(expectedTagName).closest('.container')).toHaveFocus();
+    });
 });
 

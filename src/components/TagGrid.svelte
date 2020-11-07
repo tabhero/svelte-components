@@ -44,7 +44,7 @@
         <div class="grid-row">
             {#each cells as tag}
                 <div class="grid-cell">
-                    <Tag name={tag.name} added={tag.added} on:click={e => dispatch('tagClick', { tagId: tag.id })} />
+                    <Tag name={tag.name} added={tag.added} tabindex="0" on:click={e => dispatch('tagClick', { tagId: tag.id })} />
                 </div>
             {/each}
         </div>

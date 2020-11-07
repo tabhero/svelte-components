@@ -27,10 +27,20 @@ test('does not have added class when added is passed as false', () => {
     expect(getByText('Some tag name')).not.toHaveClass('added');
 });
 
-test('is focused after the TAB key is pressed', () => {
-    const { getByTestId } = render(Tag, { name: 'Some tag name' });
+describe('on tab press', () => {
+    test('is not focused when tabindex not passed', () => {
+        const { container } = render(Tag, { name: 'Some tag name' });
 
-    userEvent.tab();
+        userEvent.tab();
 
-    expect(getByTestId('container')).toHaveFocus();
+        expect(container).toHaveFocus();
+    });
+
+    test('is focused when tabindex of 0 is passed', () => {
+        const { getByText } = render(Tag, { name: 'Some tag name', tabindex: 0 });
+
+        userEvent.tab();
+
+        expect(getByText('Some tag name').closest('.container')).toHaveFocus();
+    });
 });

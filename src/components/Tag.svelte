@@ -1,6 +1,7 @@
 <script>
     export let name = '';
     export let added = false;
+    export let tabindex = '-1';
 
     import { createEventDispatcher } from 'svelte';
 
@@ -43,6 +44,6 @@
     /* TODO: include hover case for feedback */
 </style>
 
-<div class="container" class:added on:click|stopPropagation={handleClick} data-testid="container" tabindex="0">
+<div class="container" class:added on:click|stopPropagation={handleClick} {tabindex}>
     <div class="text" class:added>{name}</div>
 </div>

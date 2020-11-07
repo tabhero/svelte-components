@@ -35,7 +35,7 @@
     }
 </style>
 
-<div class="container">
+<div class="container" data-testid="container" tabindex="0">
     {#each rows as [i, cells]}
         <div class="grid-row">
             {#each cells as tag}

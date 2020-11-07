@@ -23,10 +23,14 @@
         display: grid;
         grid-auto-rows: 1fr;
         grid-row-gap: 1rem;
+        padding: .5rem;
 
         /* DEBUG */
         /* background-color: red; */
         /* border: 1px solid black; */
+    }
+    .container:focus {
+        outline-color: var(--col-focus);
     }
 
     .grid-row {

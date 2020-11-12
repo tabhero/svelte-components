@@ -59,4 +59,19 @@ describe('on down arrow press', () => {
         await fireArrowDown(target);
         expect(getByText('Reading List').closest('[data-testid="tag-container"]')).toHaveFocus();
     });
+
+    test('focus cycles back to the top of a column of tags after moving past lowest tag', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => getByText('Youtube').closest('[data-testid="tag-container"]').focus());
+        const target = getByTestId('container');
+
+        await fireArrowDown(target);
+        expect(getByText('Study Philosophy').closest('[data-testid="tag-container"]')).toHaveFocus();
+        await fireArrowDown(target);
+        expect(getByText('Reading List').closest('[data-testid="tag-container"]')).toHaveFocus();
+        await fireArrowDown(target);
+        expect(getByText('Youtube').closest('[data-testid="tag-container"]')).toHaveFocus();
+    });
 });

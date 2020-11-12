@@ -32,7 +32,9 @@
     function handleKeyDown(event) {
         const key = event.key;
         if (key === 'ArrowDown') {
-            focusRowIndex++;
+            focusRowIndex = focusRowIndex === rows.length - 1
+                ? 0
+                : focusRowIndex + 1;
             justMounted = false;
         }
     }

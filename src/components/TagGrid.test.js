@@ -28,7 +28,7 @@ describe('on tab press', () => {
         userEvent.tab();
         userEvent.tab();
 
-        expect(getByText(expectedTagName).closest('.container')).toHaveFocus();
+        expect(getByText(expectedTagName).closest('[data-testid="tag-container"]')).toHaveFocus();
     });
 
     test('three tabs: focus leaves the component', () => {

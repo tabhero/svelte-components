@@ -58,6 +58,7 @@
 </style>
 
 <div class="container"
+    data-testid="tag-container"
     class:added
     on:click|stopPropagation={handleClick}
     on:keydown={handleKeyDown}

@@ -1,7 +1,11 @@
-import { render } from '@testing-library/svelte';
+import { render, fireEvent, act } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 
 import TagGrid from './TagGrid';
+
+const fireArrowDown = (domNode) => {
+    return fireEvent.keyDown(domNode, { key: 'ArrowDown', code: 'ArrowDown' });
+};
 
 const tags = [
     { id: 'xyz', added: true, name: 'Youtube' },
@@ -42,3 +46,17 @@ describe('on tab press', () => {
     });
 });
 
+describe('on down arrow press', () => {
+    test('focus moves down a column of tags', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => getByText('Youtube').closest('[data-testid="tag-container"]').focus());
+        const target = getByTestId('container');
+
+        await fireArrowDown(target);
+        expect(getByText('Study Philosophy').closest('[data-testid="tag-container"]')).toHaveFocus();
+        await fireArrowDown(target);
+        expect(getByText('Reading List').closest('[data-testid="tag-container"]')).toHaveFocus();
+    });
+});

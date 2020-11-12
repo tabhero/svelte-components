@@ -11,6 +11,7 @@
     const numCols = 2;
     let focusRowIndex = 0;
     let focusColIndex = 0;
+    let justMounted = true;
 
     $: rows = zipWith(range(minRows), chunk(tags, numCols), (i, _tags) => {
         _tags = _tags === undefined
@@ -18,11 +19,22 @@
             : _tags;
         return [i, _tags];
     });
+    $: {
+        if (!justMounted) {
+            const rowTags = rows[focusRowIndex][1];
+            const tag = rowTags[0];
+            if (tag.ref) {
+                tag.ref.focus();
+            }
+        }
+    }
 
-    function getTabIndex(rowIndex, colIndex) {
-        return (rowIndex === focusRowIndex && colIndex === focusColIndex)
-            ? '0'
-            : '-1';
+    function handleKeyDown(event) {
+        const key = event.key;
+        if (key === 'ArrowDown') {
+            focusRowIndex++;
+            justMounted = false;
+        }
     }
 </script>
 
@@ -47,12 +59,17 @@
     }
 </style>
 
-<div class="container" data-testid="container" tabindex="0">
+<div class="container" data-testid="container" tabindex="0" on:keydown={handleKeyDown}>
     {#each rows as [i, cells], rowInd}
         <div class="grid-row">
             {#each cells as tag, colInd}
                 <div class="grid-cell">
-                    <Tag name={tag.name} added={tag.added} tabindex={getTabIndex(rowInd, colInd)} on:click={e => dispatch('tagClick', { tagId: tag.id })} />
+                    <Tag
+                        name={tag.name}
+                        added={tag.added}
+                        tabindex={(rowInd === focusRowIndex && colInd === focusColIndex) ? '0': '-1'}
+                        on:click={e => dispatch('tagClick', { tagId: tag.id })}
+                        bind:thisRef={tag.ref} />
                 </div>
             {/each}
         </div>

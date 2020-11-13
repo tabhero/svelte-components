@@ -61,6 +61,17 @@ describe('on down arrow press', () => {
         expect(target).toHaveFocus();
     });
 
+    test('focus moves to the next appropriate tag after the one that was focused by other means', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => getByText('Study Philosophy').closest('[data-testid="tag-container"]').focus());
+        const target = getByTestId('container');
+
+        await fireArrowDown(target);
+        expect(getByText('Reading List').closest('[data-testid="tag-container"]')).toHaveFocus();
+    });
+
     test('focus moves down a column of tags', async () => {
         const { getByText, getByTestId } = render(TagGrid, {
             tags: tags.slice(0, 6)
@@ -99,6 +110,17 @@ describe('on up arrow press', () => {
         await fireArrowUp(target);
 
         expect(target).toHaveFocus();
+    });
+
+    test('focus moves to the next appropriate tag after the one that was focused by other means', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => getByText('Study Philosophy').closest('[data-testid="tag-container"]').focus());
+        const target = getByTestId('container');
+
+        await fireArrowUp(target);
+        expect(getByText('Youtube').closest('[data-testid="tag-container"]')).toHaveFocus();
     });
 
     test('focus moves up a column of tags', async () => {

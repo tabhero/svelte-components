@@ -54,6 +54,10 @@
                 : focusColIndex + 1;
             justMounted = false;
         }
+        if (key === 'ArrowLeft') {
+            focusColIndex--;
+            justMounted = false;
+        }
     }
     function handleTagFocus(rowIndex, colIndex) {
         focusRowIndex = rowIndex;

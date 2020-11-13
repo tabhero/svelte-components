@@ -49,7 +49,9 @@
             justMounted = false;
         }
         if (key === 'ArrowRight') {
-            focusColIndex++;
+            focusColIndex = focusColIndex === rows[0].length - 1
+                ? 0
+                : focusColIndex + 1;
             justMounted = false;
         }
     }

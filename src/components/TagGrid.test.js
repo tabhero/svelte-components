@@ -65,6 +65,19 @@ describe('on tab press', () => {
     });
 });
 
+describe('on shift+tab press', () => {
+    test('on one shift+tab: focuses on the container after a tag has been focused by other means', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => tagContainer(getByText('Study Philosophy')).focus());
+
+        userEvent.tab({ shift: true });
+
+        expect(getByTestId('container')).toHaveFocus();
+    });
+});
+
 describe('on down arrow press', () => {
     test('focus stays on the container when focus was on the container', async () => {
         const { getByTestId } = render(TagGrid, { tags });

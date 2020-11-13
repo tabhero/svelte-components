@@ -38,9 +38,7 @@
 
         const key = event.key;
         if (key === 'ArrowDown') {
-            focusRowIndex = focusRowIndex === rows.length - 1
-                ? 0
-                : focusRowIndex + 1;
+            focusRowIndex = nextFocusRowIndex(focusRowIndex);
         }
         if (key === 'ArrowUp') {
             focusRowIndex = focusRowIndex === 0
@@ -62,6 +60,18 @@
     function handleTagFocus(rowIndex, colIndex) {
         focusRowIndex = rowIndex;
         focusColIndex = colIndex;
+    }
+
+    function nextFocusRowIndex(rowIndex) {
+        let candidate = rowIndex === rows.length - 1
+            ? 0
+            : rowIndex + 1;
+        while (!rows[candidate][focusColIndex]) {
+            candidate = candidate === rows.length - 1
+                ? 0
+                : candidate + 1;
+        }
+        return candidate;
     }
 </script>
 

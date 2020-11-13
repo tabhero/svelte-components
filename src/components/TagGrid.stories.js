@@ -34,7 +34,7 @@ export const EmptyCellsAndRows = () => ({
     Component: TagGrid,
     props: {
         minRows: 4,
-        tags: tags.slice(0, 3)
+        tags: tags.slice(0, 5)
     },
     on: { tagClick: action('tagClicked') }
 });

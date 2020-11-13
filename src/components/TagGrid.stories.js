@@ -14,12 +14,18 @@ const tags = [
     { id: 'xyz', added: false, name: 'Events' },
     { id: 'xyz', added: false, name: 'Reading List' },
     { id: 'xyz', added: false, name: 'Medium' },
+    { id: 'xyz', added: true, name: 'Youtube' },
+    { id: 'xyz', added: true, name: 'Coffee!' },
+    { id: 'xyz', added: true, name: 'Study Philosophy' },
+    { id: 'xyz', added: false, name: 'Events' },
+    { id: 'xyz', added: false, name: 'Reading List' },
+    { id: 'xyz', added: false, name: 'Medium' },
 ];
 
 export const AllCellsFilled = () => ({
     Component: TagGrid,
     props: {
-        tags: [...tags, ...tags]
+        tags: tags
     },
     on: { tagClick: action('tagClicked') }
 });

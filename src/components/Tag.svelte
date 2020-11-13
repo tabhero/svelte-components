@@ -2,6 +2,7 @@
     export let name = '';
     export let added = false;
     export let tabindex = '-1';
+    export let thisRef = undefined;
 
     import { createEventDispatcher } from 'svelte';
 
@@ -58,9 +59,12 @@
 </style>
 
 <div class="container"
+    data-testid="tag-container"
     class:added
     on:click|stopPropagation={handleClick}
     on:keydown={handleKeyDown}
-    {tabindex}>
+    on:focus={() => dispatch('focus')}
+    {tabindex}
+    bind:this={thisRef}>
     <div class="text" class:added>{name}</div>
 </div>

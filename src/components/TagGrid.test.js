@@ -202,6 +202,22 @@ describe('on up arrow press', () => {
         await fireArrowUp(target);
         expect(tagContainer(getByText('Reading List'))).toHaveFocus();
     });
+
+    test('focus cycles back to the bottom of a column of tags after moving past highest tag when empty rows exist at the end', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6),
+            minRows: 4,
+        });
+        await act(() => tagContainer(getByText('Reading List')).focus());
+        const target = getByTestId('container');
+
+        await fireArrowUp(target);
+        expect(tagContainer(getByText('Study Philosophy'))).toHaveFocus();
+        await fireArrowUp(target);
+        expect(tagContainer(getByText('Youtube'))).toHaveFocus();
+        await fireArrowUp(target);
+        expect(tagContainer(getByText('Reading List'))).toHaveFocus();
+    });
 });
 
 describe('on right arrow press', () => {

@@ -47,6 +47,16 @@ describe('on tab press', () => {
 });
 
 describe('on down arrow press', () => {
+    test('focus stays on the container when focus was on the container', async () => {
+        const { getByTestId } = render(TagGrid, { tags });
+        const target = getByTestId('container');
+        await act(() => target.focus());
+
+        await fireArrowDown(target);
+
+        expect(target).toHaveFocus();
+    });
+
     test('focus moves down a column of tags', async () => {
         const { getByText, getByTestId } = render(TagGrid, {
             tags: tags.slice(0, 6)

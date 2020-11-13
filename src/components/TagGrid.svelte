@@ -12,6 +12,7 @@
     let focusRowIndex = 0;
     let focusColIndex = 0;
     let justMounted = true;
+    let containerRef;
 
     $: rows = zipWith(range(minRows), chunk(tags, numCols), (i, _tags) => {
         _tags = _tags === undefined
@@ -30,6 +31,10 @@
     }
 
     function handleKeyDown(event) {
+        if (document.activeElement === containerRef) {
+            return;
+        }
+
         const key = event.key;
         if (key === 'ArrowDown') {
             focusRowIndex = focusRowIndex === rows.length - 1
@@ -61,7 +66,7 @@
     }
 </style>
 
-<div class="container" data-testid="container" tabindex="0" on:keydown={handleKeyDown}>
+<div class="container" data-testid="container" tabindex="0" on:keydown={handleKeyDown} bind:this={containerRef}>
     {#each rows as [i, cells], rowInd}
         <div class="grid-row">
             {#each cells as tag, colInd}

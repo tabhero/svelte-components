@@ -38,10 +38,10 @@
 
         const key = event.key;
         if (key === 'ArrowDown') {
-            focusRowIndex = nextFocusRowIndex(focusRowIndex);
+            focusRowIndex = cycleToValidTag(focusRowIndex, i => i === rows.length - 1 ? 0 : i + 1);
         }
         if (key === 'ArrowUp') {
-            focusRowIndex = prevFocusRowIndex(focusRowIndex);
+            focusRowIndex = cycleToValidTag(focusRowIndex, i => i === 0 ? rows.length - 1 : i - 1);
         }
         if (key === 'ArrowRight') {
             focusColIndex = focusColIndex === rows[focusRowIndex].length - 1
@@ -60,25 +60,10 @@
         focusColIndex = colIndex;
     }
 
-    function nextFocusRowIndex(rowIndex) {
-        let candidate = rowIndex === rows.length - 1
-            ? 0
-            : rowIndex + 1;
+    function cycleToValidTag(rowIndex, mover) {
+        let candidate = mover(rowIndex);
         while (!rows[candidate][focusColIndex]) {
-            candidate = candidate === rows.length - 1
-                ? 0
-                : candidate + 1;
-        }
-        return candidate;
-    }
-    function prevFocusRowIndex(rowIndex) {
-        let candidate = rowIndex === 0
-            ? rows.length - 1
-            : rowIndex - 1;
-        while (!rows[candidate][focusColIndex]) {
-            candidate = candidate === 0
-                ? rows.length - 1
-                : candidate - 1;
+            candidate = mover(candidate);
         }
         return candidate;
     }

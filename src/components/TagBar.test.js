@@ -129,7 +129,7 @@ describe('on down arrow', () => {
         // arrange
         await fireArrowDown(target);  // focus on prompt
         await fireArrowDown(target);  // focus on first suggestion
-        getByPlaceholderText(placeholder).focus();  // re-focus on the input
+        await act(() => getByPlaceholderText(placeholder).focus());  // re-focus on the input
 
         // act
         await fireArrowDown(target);
@@ -162,7 +162,7 @@ describe('on down arrow', () => {
 
         // arrange
         await fireArrowDown(target);
-        getByPlaceholderText(placeholder).focus();  // re-focus on the input after having focused on the exact match
+        await act(() => getByPlaceholderText(placeholder).focus());  // re-focus on the input after having focused on the exact match
 
         // act
         await fireArrowDown(target);
@@ -215,7 +215,7 @@ describe('on down arrow', () => {
 
     test('keeps focus on the input element on arrow down when no input and hence no suggestions/prompt present', async () => {
         const { getByTestId, getByPlaceholderText } = render(TagBar, {});
-        getByPlaceholderText(placeholder).focus();
+        await act(() => getByPlaceholderText(placeholder).focus());
         const target = getByTestId('container');
 
         // act
@@ -228,7 +228,7 @@ describe('on down arrow', () => {
         const { getByTestId, getByPlaceholderText } = render(TagBar, {
             input: Array(maxInputLength + 1).fill('c').join('')
         });
-        getByPlaceholderText(placeholder).focus();
+        await act(() => getByPlaceholderText(placeholder).focus());
         const target = getByTestId('container');
 
         // act
@@ -267,7 +267,7 @@ describe('on up arrow', () => {
         // arrange
         await fireArrowDown(target);  // focus on prompt
         await fireArrowDown(target);  // focus on first suggestion
-        getByPlaceholderText(placeholder).focus();  // re-focus on the input
+        await act(() => getByPlaceholderText(placeholder).focus());  // re-focus on the input
 
         // act
         await fireArrowUp(target);
@@ -300,7 +300,7 @@ describe('on up arrow', () => {
 
         // arrange
         await fireArrowDown(target);
-        getByPlaceholderText(placeholder).focus();  // re-focus on the input after having focused on the exact match
+        await act(() => getByPlaceholderText(placeholder).focus());  // re-focus on the input after having focused on the exact match
 
         // act
         await fireArrowUp(target);
@@ -356,7 +356,7 @@ describe('on up arrow', () => {
 
     test('keeps focus on the input element on arrow up when no input and hence no suggestions/prompt present', async () => {
         const { getByTestId, getByPlaceholderText } = render(TagBar, {});
-        getByPlaceholderText(placeholder).focus();
+        await act(() => getByPlaceholderText(placeholder).focus());
         const target = getByTestId('container');
 
         // act
@@ -369,7 +369,7 @@ describe('on up arrow', () => {
         const { getByTestId, getByPlaceholderText } = render(TagBar, {
             input: Array(maxInputLength + 1).fill('c').join('')
         });
-        getByPlaceholderText(placeholder).focus();
+        await act(() => getByPlaceholderText(placeholder).focus());
         const target = getByTestId('container');
 
         // act

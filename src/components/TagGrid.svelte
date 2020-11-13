@@ -14,7 +14,8 @@
     let justMounted = true;
     let containerRef;
 
-    $: rows = zipWith(range(minRows), chunk(tags, numCols), (i, tagRow) => {
+    $: rows = chunk(tags, numCols)
+    $: gridRows = zipWith(range(minRows), rows, (i, tagRow) => {
         tagRow = tagRow === undefined
             ? []
             : tagRow;
@@ -22,7 +23,7 @@
     });
     $: {
         if (!justMounted) {
-            const tagRow = rows[focusRowIndex][1];
+            const tagRow = rows[focusRowIndex];
             const tag = tagRow[focusColIndex];
             if (tag.ref) {
                 tag.ref.focus();
@@ -86,7 +87,7 @@
 </style>
 
 <div class="container" data-testid="container" tabindex="0" on:keydown={handleKeyDown} bind:this={containerRef}>
-    {#each rows as [i, cells], rowInd}
+    {#each gridRows as [i, cells], rowInd}
         <div class="grid-row">
             {#each cells as tag, colInd}
                 <div class="grid-cell">

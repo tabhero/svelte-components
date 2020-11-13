@@ -135,6 +135,22 @@ describe('on down arrow press', () => {
         await fireArrowDown(target);
         expect(tagContainer(getByText('Youtube'))).toHaveFocus();
     });
+
+    test('focus cycles back to the top of a column of tags after moving past lowest tag when empty rows exist at the end', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6),
+            minRows: 4,
+        });
+        await act(() => tagContainer(getByText('Youtube')).focus());
+        const target = getByTestId('container');
+
+        await fireArrowDown(target);
+        expect(tagContainer(getByText('Study Philosophy'))).toHaveFocus();
+        await fireArrowDown(target);
+        expect(tagContainer(getByText('Reading List'))).toHaveFocus();
+        await fireArrowDown(target);
+        expect(tagContainer(getByText('Youtube'))).toHaveFocus();
+    });
 });
 
 describe('on up arrow press', () => {

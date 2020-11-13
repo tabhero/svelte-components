@@ -14,16 +14,16 @@
     let justMounted = true;
     let containerRef;
 
-    $: rows = zipWith(range(minRows), chunk(tags, numCols), (i, _tags) => {
-        _tags = _tags === undefined
+    $: rows = zipWith(range(minRows), chunk(tags, numCols), (i, tagRow) => {
+        tagRow = tagRow === undefined
             ? []
-            : _tags;
-        return [i, _tags];
+            : tagRow;
+        return [i, tagRow];
     });
     $: {
         if (!justMounted) {
-            const rowTags = rows[focusRowIndex][1];
-            const tag = rowTags[0];
+            const tagRow = rows[focusRowIndex][1];
+            const tag = tagRow[0];
             if (tag.ref) {
                 tag.ref.focus();
             }

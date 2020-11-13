@@ -55,8 +55,9 @@
             justMounted = false;
         }
     }
-    function handleTagFocus(rowIndex, _colIndex) {
+    function handleTagFocus(rowIndex, colIndex) {
         focusRowIndex = rowIndex;
+        focusColIndex = colIndex;
     }
 </script>
 

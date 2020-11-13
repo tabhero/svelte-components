@@ -41,9 +41,7 @@
             focusRowIndex = nextFocusRowIndex(focusRowIndex);
         }
         if (key === 'ArrowUp') {
-            focusRowIndex = focusRowIndex === 0
-                ? rows.length - 1
-                : focusRowIndex - 1;
+            focusRowIndex = prevFocusRowIndex(focusRowIndex);
         }
         if (key === 'ArrowRight') {
             focusColIndex = focusColIndex === rows[focusRowIndex].length - 1
@@ -70,6 +68,17 @@
             candidate = candidate === rows.length - 1
                 ? 0
                 : candidate + 1;
+        }
+        return candidate;
+    }
+    function prevFocusRowIndex(rowIndex) {
+        let candidate = rowIndex === 0
+            ? rows.length - 1
+            : rowIndex - 1;
+        while (!rows[candidate][focusColIndex]) {
+            candidate = candidate === 0
+                ? rows.length - 1
+                : candidate - 1;
         }
         return candidate;
     }

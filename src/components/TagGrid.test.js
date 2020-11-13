@@ -323,4 +323,15 @@ describe('on left arrow press', () => {
         await fireArrowLeft(target);
         expect(tagContainer(getByText('Coffee!'))).toHaveFocus();
     });
+
+    test('focus cycles back to the rightmost tag of a row after moving past leftmost tag when empty cells exist on columns at the end', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 3),
+        });
+        await act(() => tagContainer(getByText('Study Philosophy')).focus());
+        const target = getByTestId('container');
+
+        await fireArrowLeft(target);
+        expect(tagContainer(getByText('Study Philosophy'))).toHaveFocus();
+    });
 });

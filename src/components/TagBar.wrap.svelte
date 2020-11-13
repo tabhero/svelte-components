@@ -11,17 +11,22 @@
 
 <style>
     p {
-        text-align: center;
+        padding: 1rem;
+        background-color: #fff0cc;
+        border-radius: .5rem;
     }
 
     .big-parent {
         width: 100%;
         height: 200px;
     }
+    .tagbar-wrapper {
+        margin: .5rem 0;
+    }
 </style>
 
-<p>Some content above the component</p>
-    <div class:big-parent={_wrapConfig.parentBig}>
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias odio doloremque suscipit, assumenda neque dolore praesentium quae est voluptatem, exercitationem laboriosam aut quas? Accusantium beatae ab, autem at minus perspiciatis!</p>
+    <div class="tagbar-wrapper" class:big-parent={_wrapConfig.parentBig}>
         <TagBar
             {suggestions}
             {input}
@@ -30,4 +35,4 @@
             on:selectSuggestion
             on:selectNew />
     </div>
-<p>Some content below the component</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aliquam ex necessitatibus debitis mollitia minus animi, ipsa eaque. Aliquam nemo ut ipsam esse illum veniam enim officiis doloribus numquam nobis.</p>

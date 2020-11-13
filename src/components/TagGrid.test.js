@@ -11,6 +11,10 @@ const fireArrowUp = (domNode) => {
     return fireEvent.keyDown(domNode, { key: 'ArrowUp', code: 'ArrowUp' });
 };
 
+const fireArrowRight = (domNode) => {
+    return fireEvent.keyDown(domNode, { key: 'ArrowRight', code: 'ArrowRight' });
+};
+
 const tagContainer = (domNode) => {
     return domNode.closest('[data-testid="tag-container"]');
 };
@@ -177,5 +181,17 @@ describe('on up arrow press', () => {
         expect(tagContainer(getByText('Youtube'))).toHaveFocus();
         await fireArrowUp(target);
         expect(tagContainer(getByText('Reading List'))).toHaveFocus();
+    });
+});
+
+describe('on right arrow press', () => {
+    test('focus stays on the container when focus was on the container', async () => {
+        const { getByTestId } = render(TagGrid, { tags });
+        const target = getByTestId('container');
+        await act(() => target.focus());
+
+        await fireArrowRight(target);
+
+        expect(target).toHaveFocus();
     });
 });

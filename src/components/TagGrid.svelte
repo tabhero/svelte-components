@@ -40,26 +40,23 @@
             focusRowIndex = focusRowIndex === rows.length - 1
                 ? 0
                 : focusRowIndex + 1;
-            justMounted = false;
         }
         if (key === 'ArrowUp') {
             focusRowIndex = focusRowIndex === 0
                 ? rows.length - 1
                 : focusRowIndex - 1;
-            justMounted = false;
         }
         if (key === 'ArrowRight') {
             focusColIndex = focusColIndex === rows[0].length - 1
                 ? 0
                 : focusColIndex + 1;
-            justMounted = false;
         }
         if (key === 'ArrowLeft') {
             focusColIndex = focusColIndex === 0
                 ? rows[0].length - 1
                 : focusColIndex - 1;
-            justMounted = false;
         }
+        justMounted = false;
     }
     function handleTagFocus(rowIndex, colIndex) {
         focusRowIndex = rowIndex;

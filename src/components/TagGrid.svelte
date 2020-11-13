@@ -48,7 +48,7 @@
                 : focusRowIndex - 1;
         }
         if (key === 'ArrowRight') {
-            focusColIndex = focusColIndex === rows[0].length - 1
+            focusColIndex = focusColIndex === rows[focusRowIndex].length - 1
                 ? 0
                 : focusColIndex + 1;
         }

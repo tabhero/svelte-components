@@ -265,6 +265,17 @@ describe('on right arrow press', () => {
         await fireArrowRight(target);
         expect(tagContainer(getByText('Youtube'))).toHaveFocus();
     });
+
+    test('focus cycles back to the leftmost tag of a row after moving past rightmost tag when empty cells exist on columns at the end', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 3),
+        });
+        await act(() => tagContainer(getByText('Study Philosophy')).focus());
+        const target = getByTestId('container');
+
+        await fireArrowRight(target);
+        expect(tagContainer(getByText('Study Philosophy'))).toHaveFocus();
+    });
 });
 
 describe('on left arrow press', () => {

@@ -52,6 +52,17 @@ describe('on tab press', () => {
 
         expect(container).toHaveFocus();
     });
+
+    test('on one tab: focus leaves the component after a tag has been focused by other means', async () => {
+        const { getByText, container } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => tagContainer(getByText('Study Philosophy')).focus());
+
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
+    });
 });
 
 describe('on down arrow press', () => {

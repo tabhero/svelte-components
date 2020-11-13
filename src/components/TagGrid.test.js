@@ -246,6 +246,17 @@ describe('on left arrow press', () => {
         expect(target).toHaveFocus();
     });
 
+    test('focus moves to the next appropriate tag after the one that was focused by other means', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => tagContainer(getByText('Coffee!')).focus());
+        const target = getByTestId('container');
+
+        await fireArrowLeft(target);
+        expect(tagContainer(getByText('Youtube'))).toHaveFocus();
+    });
+
     test('focus moves to the left in a row of tags', async () => {
         const { getByText, getByTestId } = render(TagGrid, {
             tags: tags.slice(0, 6)

@@ -23,7 +23,7 @@
     $: {
         if (!justMounted) {
             const tagRow = rows[focusRowIndex][1];
-            const tag = tagRow[0];
+            const tag = tagRow[focusColIndex];
             if (tag.ref) {
                 tag.ref.focus();
             }
@@ -46,6 +46,10 @@
             focusRowIndex = focusRowIndex === 0
                 ? rows.length - 1
                 : focusRowIndex - 1;
+            justMounted = false;
+        }
+        if (key === 'ArrowRight') {
+            focusColIndex++;
             justMounted = false;
         }
     }

@@ -63,6 +63,7 @@
     class:added
     on:click|stopPropagation={handleClick}
     on:keydown={handleKeyDown}
+    on:focus={() => dispatch('focus')}
     {tabindex}
     bind:this={thisRef}>
     <div class="text" class:added>{name}</div>

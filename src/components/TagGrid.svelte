@@ -42,6 +42,13 @@
                 : focusRowIndex + 1;
             justMounted = false;
         }
+        if (key === 'ArrowUp') {
+            focusRowIndex--;
+            justMounted = false;
+        }
+    }
+    function handleTagFocus(rowIndex, _colIndex) {
+        focusRowIndex = rowIndex;
     }
 </script>
 
@@ -76,7 +83,8 @@
                         added={tag.added}
                         tabindex={(rowInd === focusRowIndex && colInd === focusColIndex) ? '0': '-1'}
                         on:click={e => dispatch('tagClick', { tagId: tag.id })}
-                        bind:thisRef={tag.ref} />
+                        bind:thisRef={tag.ref}
+                        on:focus={() => handleTagFocus(rowInd, colInd)} />
                 </div>
             {/each}
         </div>

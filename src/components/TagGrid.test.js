@@ -256,4 +256,17 @@ describe('on left arrow press', () => {
         await fireArrowLeft(target);
         expect(tagContainer(getByText('Youtube'))).toHaveFocus();
     });
+
+    test('focus cycles back to the rightmost tag of a row after moving past leftmost tag', async () => {
+        const { getByText, getByTestId } = render(TagGrid, {
+            tags: tags.slice(0, 6)
+        });
+        await act(() => tagContainer(getByText('Coffee!')).focus());
+        const target = getByTestId('container');
+
+        await fireArrowLeft(target);
+        expect(tagContainer(getByText('Youtube'))).toHaveFocus();
+        await fireArrowLeft(target);
+        expect(tagContainer(getByText('Coffee!'))).toHaveFocus();
+    });
 });

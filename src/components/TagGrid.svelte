@@ -55,7 +55,9 @@
             justMounted = false;
         }
         if (key === 'ArrowLeft') {
-            focusColIndex--;
+            focusColIndex = focusColIndex === 0
+                ? rows[0].length - 1
+                : focusColIndex - 1;
             justMounted = false;
         }
     }

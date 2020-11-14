@@ -1,2 +1,3 @@
 components/**/*.stories.js
 components/**/*.wrap.svelte
+components/**/*.test.js

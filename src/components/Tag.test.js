@@ -27,6 +27,15 @@ describe('on render', () => {
 
         expect(getByText('Some tag name')).not.toHaveClass('added');
     });
+
+    test('tag has focus when rendered with intoFocus prop', () => {
+        const { getByTestId } = render(Tag, {
+            name: 'Some tag name',
+            intoFocus: true
+        });
+
+        expect(getByTestId('tag-container')).toHaveFocus();
+    });
 });
 
 describe('on tab press', () => {

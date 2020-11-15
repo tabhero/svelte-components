@@ -3,10 +3,17 @@
     export let added = false;
     export let tabindex = '-1';
     export let thisRef = undefined;
+    export let intoFocus = false;
 
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher, onMount } from 'svelte';
 
     const dispatch = createEventDispatcher();
+
+    onMount(() => {
+        if (intoFocus) {
+            thisRef.focus();
+        }
+    });
 
     const handleClick = () => {
         dispatch('click');

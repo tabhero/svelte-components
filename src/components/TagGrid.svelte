@@ -21,15 +21,6 @@
             : tagRow;
         return [i, tagRow];
     });
-    $: {
-        if (!justMounted) {
-            const tagRow = rows[focusRowIndex];
-            const tag = tagRow[focusColIndex];
-            if (tag.ref) {
-                tag.ref.focus();
-            }
-        }
-    }
 
     function handleKeyDown(event) {
         if (document.activeElement === containerRef) {
@@ -100,8 +91,8 @@
                         added={tag.added}
                         tabindex={(rowInd === focusRowIndex && colInd === focusColIndex) ? '0': '-1'}
                         on:click={e => dispatch('tagClick', { tagId: tag.id })}
-                        bind:thisRef={tag.ref}
-                        on:focus={() => handleTagFocus(rowInd, colInd)} />
+                        on:focus={() => handleTagFocus(rowInd, colInd)}
+                        intoFocus={!justMounted && (rowInd === focusRowIndex && colInd === focusColIndex)} />
                 </div>
             {/each}
         </div>

@@ -2,11 +2,18 @@
     export let name = '';
     export let added = false;
     export let tabindex = '-1';
-    export let thisRef = undefined;
+    export let intoFocus = false;
 
     import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
+    let tagRef;
+
+    $: {
+        if (intoFocus && tagRef) {
+            tagRef.focus();
+        }
+    }
 
     const handleClick = () => {
         dispatch('click');
@@ -65,6 +72,6 @@
     on:keydown={handleKeyDown}
     on:focus={() => dispatch('focus')}
     {tabindex}
-    bind:this={thisRef}>
+    bind:this={tagRef}>
     <div class="text" class:added>{name}</div>
 </div>

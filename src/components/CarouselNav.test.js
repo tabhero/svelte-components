@@ -26,6 +26,14 @@ describe('on render', () => {
         });
         expect(getByLabelText('Page 1')).toHaveClass('current');
     });
+
+    test('when given page index is right-out-of-bound: sets the last page as current', () => {
+        const { getByLabelText } = render(CarouselNav, {
+            numPages: 5,
+            currentIndex: 5
+        });
+        expect(getByLabelText('Page 5')).toHaveClass('current');
+    });
 });
 
 describe('on tab press', () => {

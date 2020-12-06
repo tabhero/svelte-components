@@ -18,6 +18,14 @@ describe('on render', () => {
         });
         expect(getByLabelText('Page 4')).toHaveClass('current');
     });
+
+    test('when given page index is left-out-of-bound: sets the first page as current', () => {
+        const { getByLabelText } = render(CarouselNav, {
+            numPages: 5,
+            currentIndex: -1
+        });
+        expect(getByLabelText('Page 1')).toHaveClass('current');
+    });
 });
 
 describe('on tab press', () => {

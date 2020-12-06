@@ -57,4 +57,17 @@ describe('on tab press', () => {
 
         expect(getAllByRole('button')[1]).toHaveFocus();
     });
+
+    test('four tabs: focus leaves the component', () => {
+        const { container } = render(CarouselNav, {
+            numPages: 2
+        });
+
+        userEvent.tab();
+        userEvent.tab();
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(container).toHaveFocus();
+    });
 });

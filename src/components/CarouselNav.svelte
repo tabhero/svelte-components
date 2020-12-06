@@ -19,7 +19,7 @@
     <ul>
         {#each range(numPages) as i}
             <li on:click={() => dispatch('clickPage', { page: i })}>  <!-- making the larger area the clickable area -->
-                <span class:current={i === currentIndex}></span>
+                <span class:current={i === currentIndex} aria-label={`Page ${i + 1}`}></span>
             </li>
         {/each}
     </ul>

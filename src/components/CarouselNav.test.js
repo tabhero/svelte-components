@@ -10,6 +10,14 @@ describe('on render', () => {
         });
         expect(getByLabelText('Page 1')).toHaveClass('current');
     });
+
+    test('when multiple pages, sets the page of the given page index as current', () => {
+        const { getByLabelText } = render(CarouselNav, {
+            numPages: 5,
+            currentIndex: 3
+        });
+        expect(getByLabelText('Page 4')).toHaveClass('current');
+    });
 });
 
 describe('on tab press', () => {

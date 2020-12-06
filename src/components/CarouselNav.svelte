@@ -57,6 +57,10 @@
     li span.current {
         background-color: var(--col-primary);
     }
+    li span:focus {
+        outline-color: var(--col-focus);
+        outline-offset: 2px;
+    }
 
     button {
         border: none;

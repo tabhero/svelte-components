@@ -33,4 +33,16 @@ describe('on tab press', () => {
 
         expect(getByLabelText('Page 1')).toHaveFocus();
     });
+
+    test('three tabs: focus on the right button even if more than one page present', () => {
+        const { getAllByRole } = render(CarouselNav, {
+            numPages: 2
+        });
+
+        userEvent.tab();
+        userEvent.tab();
+        userEvent.tab();
+
+        expect(getAllByRole('button')[1]).toHaveFocus();
+    });
 });

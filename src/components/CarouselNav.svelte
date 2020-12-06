@@ -64,6 +64,7 @@
 
     button {
         border: none;
+        outline-color: var(--col-focus);
         background-color: var(--col-light-primary);
     }
 </style>

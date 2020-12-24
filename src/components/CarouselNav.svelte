@@ -18,7 +18,9 @@
     function handleKeydown(event) {
         const key = event.key;
         if (key === 'ArrowRight') {
-            focusableIndex++;
+            focusableIndex = focusableIndex >= numPages - 1
+                ? 0
+                : focusableIndex + 1;
         }
     }
     function handlePageFocus(pageIndex) {

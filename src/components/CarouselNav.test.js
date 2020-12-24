@@ -112,4 +112,16 @@ describe('on right arrow', async () => {
 
         expect(getByLabelText('Page 3')).toHaveFocus();
     });
+
+    test('wraps the focus to the first page if last page was focused', async () => {
+        const { getByLabelText, getByTestId } = render(CarouselNav, {
+            numPages: 3
+        });
+        const pageNav = getByTestId('page-nav');
+        await act(() => getByLabelText('Page 3').focus());
+
+        await fireArrowRight(pageNav);
+
+        expect(getByLabelText('Page 1')).toHaveFocus();
+    });
 });

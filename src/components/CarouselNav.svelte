@@ -23,7 +23,9 @@
                 : focusableIndex + 1;
         }
         if (key === 'ArrowLeft') {
-            focusableIndex--;
+            focusableIndex = focusableIndex <= 0
+                ? numPages - 1
+                : focusableIndex - 1;
         }
     }
     function handlePageFocus(pageIndex) {

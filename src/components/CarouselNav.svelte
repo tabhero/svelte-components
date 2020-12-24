@@ -21,6 +21,9 @@
             focusableIndex++;
         }
     }
+    function handlePageFocus(pageIndex) {
+        focusableIndex = pageIndex;
+    }
     function focusNode(node, { nodeIndex, focusableIndex }) {
         return {
             update({ nodeIndex, focusableIndex }) {
@@ -41,6 +44,7 @@
                     class:current={i === currentIndex}
                     aria-label={`Page ${i + 1}`}
                     tabindex={i === focusableIndex ? '0' : '-1'}
+                    on:focus={() => handlePageFocus(i)}
                     use:focusNode={{ nodeIndex: i, focusableIndex }}>
                 </span>
             </li>

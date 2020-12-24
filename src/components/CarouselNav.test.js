@@ -103,13 +103,13 @@ describe('on tab press', () => {
 describe('on right arrow', async () => {
     test('focuses on the page after the currently focused one', async () => {
         const { getByLabelText, getByTestId } = render(CarouselNav, {
-            numPages: 2
+            numPages: 3
         });
         const pageNav = getByTestId('page-nav');
-        await act(() => getByLabelText('Page 1').focus());
+        await act(() => getByLabelText('Page 2').focus());
 
         await fireArrowRight(pageNav);
 
-        expect(getByLabelText('Page 2')).toHaveFocus();
+        expect(getByLabelText('Page 3')).toHaveFocus();
     });
 });

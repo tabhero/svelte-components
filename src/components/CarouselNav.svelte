@@ -21,11 +21,13 @@
             focusableIndex = focusableIndex >= numPages - 1
                 ? 0
                 : focusableIndex + 1;
+            dispatch('clickRight');
         }
         if (key === 'ArrowLeft') {
             focusableIndex = focusableIndex <= 0
                 ? numPages - 1
                 : focusableIndex - 1;
+            dispatch('clickLeft');
         }
     }
     function handlePageFocus(pageIndex) {
@@ -40,13 +42,18 @@
             }
         };
     }
+    function handlePageSelect(pageIndex) {
+        dispatch('clickPage', { page: pageIndex });
+    }
 </script>
 
 <nav on:keydown={handleKeydown} data-testid="page-nav">
     <button on:click={() => dispatch('clickLeft')}>&lt;</button>
     <ul>
         {#each range(numPages) as i}
-            <li on:click={() => dispatch('clickPage', { page: i })}>  <!-- making the larger area the clickable area -->
+            <li
+                on:click={() => handlePageSelect(i)}
+                on:keydown={e => e.key === 'Enter' && handlePageSelect(i)}>  <!-- making the larger area the clickable area -->
                 <span
                     class:current={i === currentIndex}
                     aria-label={`Page ${i + 1}`}

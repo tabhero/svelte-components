@@ -1,7 +1,7 @@
 <script>
     export let name = '';
     export let added = false;
-    export let tabindex = '-1';
+    export let tabindex = '0';
     export let intoFocus = false;
 
     import { createEventDispatcher } from 'svelte';

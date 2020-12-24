@@ -39,16 +39,16 @@ describe('on render', () => {
 });
 
 describe('on tab press', () => {
-    test('is not focused when tabindex not passed', () => {
-        const { container } = render(Tag, { name: 'Some tag name' });
+    test('is not focused when tabindex -1 is passed', () => {
+        const { container } = render(Tag, { name: 'Some tag name', tabindex: '-1' });
 
         userEvent.tab();
 
         expect(container).toHaveFocus();
     });
 
-    test('is focused when tabindex of 0 is passed', () => {
-        const { getByText } = render(Tag, { name: 'Some tag name', tabindex: 0 });
+    test('is focused when tabindex is not passed', () => {
+        const { getByText } = render(Tag, { name: 'Some tag name' });
 
         userEvent.tab();
 

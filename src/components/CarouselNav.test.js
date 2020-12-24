@@ -104,7 +104,7 @@ describe('on tab press', () => {
     });
 });
 
-describe('on right arrow', async () => {
+describe('on right arrow', () => {
     test('focuses on the page after the currently focused one', async () => {
         const { getByLabelText, getByTestId } = render(CarouselNav, {
             numPages: 3
@@ -130,7 +130,7 @@ describe('on right arrow', async () => {
     });
 });
 
-describe('on left arrow', async () => {
+describe('on left arrow', () => {
     test('focuses on the page pervious to the currently focused one', async () => {
         const { getByLabelText, getByTestId } = render(CarouselNav, {
             numPages: 3

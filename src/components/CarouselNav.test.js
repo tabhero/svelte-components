@@ -115,6 +115,19 @@ describe('on tab press', () => {
     });
 });
 
+describe('on shift+tab press', () => {
+    test('on one shift+tab: focus on the left button if a page has been focused by other means', async () => {
+        const { getAllByRole, getByLabelText } = render(CarouselNav, {
+            numPages: 3
+        });
+        await act(() => getByLabelText('Page 2').focus());
+
+        userEvent.tab({ shift: true });
+
+        expect(getAllByRole('button')[0]).toHaveFocus();
+    });
+});
+
 describe('on right arrow', () => {
     test('focuses on the page after the currently focused one', async () => {
         const { getByLabelText, getByTestId } = render(CarouselNav, {

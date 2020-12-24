@@ -55,6 +55,17 @@ describe('on tab press', () => {
         expect(getAllByRole('button')[0]).toHaveFocus();
     });
 
+    test('one tab: focus on the right button if a page has been focused by other means', async () => {
+        const { getAllByRole, getByLabelText } = render(CarouselNav, {
+            numPages: 3
+        });
+        await act(() => getByLabelText('Page 2').focus());
+
+        userEvent.tab();
+
+        expect(getAllByRole('button')[1]).toHaveFocus();
+    });
+
     test('two tabs: focus on the first page if no page index is given', () => {
         const { getByLabelText } = render(CarouselNav, {
             numPages: 2

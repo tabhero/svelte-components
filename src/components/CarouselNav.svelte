@@ -5,6 +5,8 @@
     export let numPages = 0;
     export let currentIndex = 0;
 
+    let focusableIndex = currentIndex;
+
     $: currentIndex = currentIndex < 0
         ? 0
         : currentIndex > numPages - 1
@@ -12,14 +14,35 @@
             : currentIndex;
 
     const dispatch = createEventDispatcher();
+
+    function handleKeydown(event) {
+        const key = event.key;
+        if (key === 'ArrowRight') {
+            focusableIndex++;
+        }
+    }
+    function focusNode(node, { nodeIndex, focusableIndex }) {
+        return {
+            update({ nodeIndex, focusableIndex }) {
+                if (focusableIndex === nodeIndex) {
+                    node.focus();
+                }
+            }
+        };
+    }
 </script>
 
-<nav>
+<nav on:keydown={handleKeydown} data-testid="page-nav">
     <button on:click={() => dispatch('clickLeft')}>&lt;</button>
     <ul>
         {#each range(numPages) as i}
             <li on:click={() => dispatch('clickPage', { page: i })}>  <!-- making the larger area the clickable area -->
-                <span class:current={i === currentIndex} aria-label={`Page ${i + 1}`} tabindex={i === currentIndex ? '0' : '-1'}></span>
+                <span
+                    class:current={i === currentIndex}
+                    aria-label={`Page ${i + 1}`}
+                    tabindex={i === focusableIndex ? '0' : '-1'}
+                    use:focusNode={{ nodeIndex: i, focusableIndex }}>
+                </span>
             </li>
         {/each}
     </ul>

@@ -1,7 +1,11 @@
-import { render } from '@testing-library/svelte';
+import { act, render, fireEvent } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 
 import CarouselNav from './CarouselNav.svelte';
+
+const fireArrowRight = (domNode) => {
+    return fireEvent.keyDown(domNode, { key: 'ArrowRight', code: 'ArrowRight' });
+};
 
 describe('on render', () => {
     test('when multiple pages but no page index is given, sets the first page as current', () => {
@@ -93,5 +97,19 @@ describe('on tab press', () => {
         userEvent.tab();
 
         expect(container).toHaveFocus();
+    });
+});
+
+describe('on right arrow', async () => {
+    test('focuses on the page after the currently focused one', async () => {
+        const { getByLabelText, getByTestId } = render(CarouselNav, {
+            numPages: 2
+        });
+        const pageNav = getByTestId('page-nav');
+        await act(() => getByLabelText('Page 1').focus());
+
+        await fireArrowRight(pageNav);
+
+        expect(getByLabelText('Page 2')).toHaveFocus();
     });
 });

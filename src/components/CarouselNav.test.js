@@ -7,6 +7,10 @@ const fireArrowRight = (domNode) => {
     return fireEvent.keyDown(domNode, { key: 'ArrowRight', code: 'ArrowRight' });
 };
 
+const fireArrowLeft = (domNode) => {
+    return fireEvent.keyDown(domNode, { key: 'ArrowLeft', code: 'ArrowLeft' });
+};
+
 describe('on render', () => {
     test('when multiple pages but no page index is given, sets the first page as current', () => {
         const { getByLabelText } = render(CarouselNav, {
@@ -121,6 +125,20 @@ describe('on right arrow', async () => {
         await act(() => getByLabelText('Page 3').focus());
 
         await fireArrowRight(pageNav);
+
+        expect(getByLabelText('Page 1')).toHaveFocus();
+    });
+});
+
+describe('on left arrow', async () => {
+    test('focuses on the page pervious to the currently focused one', async () => {
+        const { getByLabelText, getByTestId } = render(CarouselNav, {
+            numPages: 3
+        });
+        const pageNav = getByTestId('page-nav');
+        await act(() => getByLabelText('Page 2').focus());
+
+        await fireArrowLeft(pageNav);
 
         expect(getByLabelText('Page 1')).toHaveFocus();
     });

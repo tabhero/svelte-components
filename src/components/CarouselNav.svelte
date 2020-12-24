@@ -22,6 +22,9 @@
                 ? 0
                 : focusableIndex + 1;
         }
+        if (key === 'ArrowLeft') {
+            focusableIndex--;
+        }
     }
     function handlePageFocus(pageIndex) {
         focusableIndex = pageIndex;

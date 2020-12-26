@@ -15,6 +15,11 @@
         background-color: var(--col-light-primary);
         color: var(--col-secondary);
     }
+
+    button:focus {
+        outline: 0;
+        box-shadow: 0 0 0 2px var(--col-focus);
+    }
 </style>
 
 <button on:click>

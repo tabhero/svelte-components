@@ -34,4 +34,7 @@
     .checkbox {
         margin-right: .5rem;
     }
+    .checkbox:focus {
+        outline-color: var(--col-focus);
+    }
 </style>

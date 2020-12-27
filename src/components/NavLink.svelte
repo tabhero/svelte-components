@@ -6,8 +6,12 @@
         cursor: pointer;
         text-decoration: underline;
     }
+    span:focus {
+        outline-color: var(--col-focus);
+        outline-offset: 5px;
+    }
 </style>
 
-<span on:click>
+<span on:click tabindex="0">
     <slot>go</slot>
 </span>

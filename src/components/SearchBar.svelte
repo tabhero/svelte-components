@@ -11,6 +11,10 @@
 
         display: flex;
     }
+    .container:focus-within {
+        border-color: transparent;
+        box-shadow: 0 0 0 2px var(--col-focus);
+    }
 
     input {
         font-size: var(--font-size-md);

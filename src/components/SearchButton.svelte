@@ -12,6 +12,9 @@
         color: var(--col-secondary);
         vertical-align: text-top;
     }
+    button:focus {
+        outline-color: var(--col-focus);
+    }
 </style>
 
 <button on:click>

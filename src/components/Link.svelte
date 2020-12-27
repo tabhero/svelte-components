@@ -38,4 +38,8 @@
     .title:hover {
         text-decoration: underline;
     }
+    .title:focus {
+        outline-color: var(--col-focus);
+        outline-offset: 5px;
+    }
 </style>

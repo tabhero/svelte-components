@@ -9,9 +9,13 @@
         border-radius: .25rem;
         width: 100%;
         font-size: var(--font-size-md);
-        outline: none;
         text-align: center;
         padding: .5rem 1rem;
+    }
+    input:focus {
+        outline: 0;
+        border-width: 0;
+        box-shadow: 0 0 0 2px var(--col-focus);
     }
 </style>
 

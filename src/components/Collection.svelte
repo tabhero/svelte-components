@@ -24,7 +24,7 @@
         cursor: pointer;
     }
     .container:focus {
-        outline: solid 1px var(--col-focus);
+        outline: solid 2px var(--col-focus);
     }
 
     .name {
